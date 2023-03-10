@@ -13,7 +13,7 @@ class IncidenceController extends Controller
      */
     public function index()
     {
-        
+    
         $incidences = Incidence::get();
         return response()->json($incidences,200);
     }
