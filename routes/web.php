@@ -1,6 +1,14 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StateController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\IncidenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +26,15 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::resource('states', StateController::class);
+Route::resource('areas', AreaController::class);
+Route::resource('locations', LocationController::class);
+Route::resource('categories', CategoryController::class);
+Route::resource('incidences', IncidenceController::class);
+Route::resource('bookings', BookingController::class);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
