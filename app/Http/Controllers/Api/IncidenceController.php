@@ -23,7 +23,7 @@ class IncidenceController extends Controller
      */
     public function create()
     {
-        //
+        // 
     }
 
     /**
