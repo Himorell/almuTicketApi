@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Incidence
@@ -28,7 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Incidence extends Model
 {
-    
+    use HasFactory;
     static $rules = [
 		'user_id' => 'required',
 		'area_id' => 'required',

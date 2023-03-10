@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\StateController;
+use App\Http\Controllers\Api\IncidenceController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::get('/', [IncidenceController::class, 'index'])->name('incidencesApi');
+Route::get('/states', [StateController::class, 'index'])->name('statesApi');
+Route::delete('/deleteStateApi/{id}',[StateController::class,'destroy'])->name('destroyStateApi');
+
