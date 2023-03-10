@@ -25,6 +25,15 @@ class ApiCRUDStatesTest extends TestCase
         $response->assertStatus(200);
         $this->assertDatabaseMissing('states', ['id' => $state->id]);
     }
-    
 
+    public function test_IfStatesCreatedAStateInJsonFile()
+    {
+        $response = $this->post(route('createStateApi'), [ 
+            'name' => 'Emitido',
+        ]);
+
+        $data = ['name' => 'Emitido'];
+        $response = $this->get(route('statesApi'));
+        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
+    }
 }
