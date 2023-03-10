@@ -30,7 +30,11 @@ class StateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $state = State::create([
+            'name' => $request->name,
+        ]);
+        $state->save();
+        return response()->json($state, 200);
     }
 
     /**
