@@ -2,8 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\StateController;
-use App\Http\Controllers\Api\IncidenceController;
+// use App\Http\Controllers\Api\IncidenceController;
 
 
 /*
@@ -20,5 +22,9 @@ use App\Http\Controllers\Api\IncidenceController;
 //Route::get('/', [IncidenceController::class, 'index'])->name('incidencesApi');
 Route::get('/states', [StateController::class, 'index'])->name('statesApi');
 Route::delete('/deleteState/{id}',[StateController::class,'destroy'])->name('destroyStateApi');
-Route::post('/createState',[StateController::class,'store'])->name('createStateApi'); 
+Route::post('/createState',[StateController::class,'store'])->name('createStateApi');
 
+Route::get('/areas', [AreaController::class, 'index'])->name('areasApi');
+Route::delete('/deleteArea/{id}', [AreaController::class, 'destroy'])->name('destroyAreaApi');
+Route::post('/createArea', [AreaController::class, 'store'])->name('createAreaApi');
+Route::put('/updateArea/{id}',[AreaController::class, 'area'])->name('createAreaApi');
