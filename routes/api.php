@@ -4,10 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AreaController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\StateController;
+use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\LocationController;
-use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\IncidenceController;
 
 /*
@@ -50,3 +51,9 @@ Route::get('/users', [UserController::class, 'index'])->name('usersApi');
 Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('destroyUserApi');
 Route::post('/createUser', [UserController::class, 'store'])->name('createUserApi');
 Route::put('/updateUser/{id}', [UserController::class, 'update'])->name('updateUserApi');
+
+
+Route::get('/bookings', [BookingController::class, 'index'])->name('bookingsApi');
+Route::delete('/deleteBooking/{id}', [BookingController::class, 'destroy'])->name('destroyBookingApi');
+Route::post('/createBooking', [BookingController::class, 'store'])->name('createBookingApi');
+Route::put('/updateBooking/{id}', [BookingController::class, 'update'])->name('updateBookingApi');

@@ -30,7 +30,7 @@ Use RefreshDatabase;
         $this->assertDatabaseMissing('areas', ['id' => $area->id]);
     }
 
-    public function test_CheckIfCanCreateAnAreaWhithJsonFile()
+    public function test_CheckIfCanCreateAnAreaWithJsonFile()
     {
         $response = $this->post(route('createAreaApi'), [
             'name' => 'Internacional',
@@ -42,7 +42,7 @@ Use RefreshDatabase;
         $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
     }
 
-    public function test_CheckIfCanUpdateAnAreaWhithJsonFile()
+    public function test_CheckIfCanUpdateAnAreaWithJsonFile()
     {
         $response = $this->post(route('createAreaApi'), [
             'name' => 'Internacional',
