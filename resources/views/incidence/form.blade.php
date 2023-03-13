@@ -7,24 +7,20 @@
             {!! $errors->first('user_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('area_id') }}
-            {{ Form::select('area_id', $incidence->area_id, ['class' => 'form-control' . ($errors->has('area_id') ? ' is-invalid' : ''), 'placeholder' => 'Area Id']) }}
-            {!! $errors->first('area_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="user">Usuario</label>
+            {!! Form::select('user_id', $users, null, ['class' => 'form-control', 'name' => 'user_id']) !!}
+        </div> 
+        <div class="form-group">
+            <label for="category">Categoría</label>
+            {!! Form::select('category_id', $categories, null, ['class' => 'form-control', 'name' => 'category_id']) !!}
         </div>
         <div class="form-group">
-            {{ Form::select('category_id') }}
-            {{ Form::text('category_id', $incidence->category_id, ['class' => 'form-control' . ($errors->has('category_id') ? ' is-invalid' : ''), 'placeholder' => 'Category Id']) }}
-            {!! $errors->first('category_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="area">Areas</label>
+            {!! Form::select('area_id', $areas, null, ['class' => 'form-control', 'name' => 'area_id']) !!}
         </div>
         <div class="form-group">
-            {{ Form::label('location_id') }}
-            {{ Form::text('location_id', $incidence->location_id, ['class' => 'form-control' . ($errors->has('location_id') ? ' is-invalid' : ''), 'placeholder' => 'Location Id']) }}
-            {!! $errors->first('location_id', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('state_id') }}
-            {{ Form::text('state_id', $incidence->state_id, ['class' => 'form-control' . ($errors->has('state_id') ? ' is-invalid' : ''), 'placeholder' => 'State Id']) }}
-            {!! $errors->first('state_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="location">Sede</label>
+            {!! Form::select('location_id', $locations, null, ['class' => 'form-control', 'name' => 'location_id']) !!}
         </div>
         <div class="form-group">
             {{ Form::label('title') }}
@@ -35,6 +31,10 @@
             {{ Form::label('description') }}
             {{ Form::text('description', $incidence->description, ['class' => 'form-control' . ($errors->has('description') ? ' is-invalid' : ''), 'placeholder' => 'Description']) }}
             {!! $errors->first('description', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            <label for="state">Estado</label>
+            {!! Form::select('state_id', $states, null, ['class' => 'form-control', 'name' => 'state_id']) !!}
         </div>
 
     </div>
