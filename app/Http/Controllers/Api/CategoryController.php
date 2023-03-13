@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Area;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
-class AreaController extends Controller
+class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+        public function index()
     {
-        $areas = Area::get();
-        return response()->json($areas,200);
+        $categories = Category::get();
+        return response()->json($categories,200);
     }
 
     /**
@@ -31,11 +27,11 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        $area = Area::create([
+        $category = Category::create([
             'name' => $request->name,
         ]);
-        $area->save();
-        return response()->json($area, 200);
+        $category->save();
+        return response()->json($category, 200);
     }
 
     /**
@@ -59,15 +55,15 @@ class AreaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $area = Area::find($id);
+        $category = Category::find($id);
 
-        $area ->update([
+        $category ->update([
             'name' => $request->name,
         ]);
 
-        $area->save();
+        $category->save();
 
-        return response()->json($area, 200);
+        return response()->json($category, 200);
     }
 
     /**
@@ -75,14 +71,13 @@ class AreaController extends Controller
      */
     public function destroy($id)
     {
-        $area = Area::find($id);
+        $category = Category::find($id);
 
-        if (!$area) {
-            return response()->json(['error' => 'Area not found'], 404);
+        if (!$category) {
+            return response()->json(['error' => 'Category not found'], 404);
         }
 
-        $area->delete();
-        return response()->json(['message' => 'Area deleted successfully']);
+        $category->delete();
+        return response()->json(['message' => 'Category deleted successfully']);
     }
-
 }
