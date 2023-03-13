@@ -23,10 +23,13 @@ class IncidenceController extends Controller
      */
     public function index()
     {
-        $incidences = Incidence::with(['user', 'area', 'category', 'location', 'state'])->paginate();
+        //$incidences = Incidence::with(['user', 'area', 'category', 'location', 'state'])->paginate();
+        //return view('incidence.index')->with('incidences', $incidences);
 
-        return view('incidence.index')->with('incidences', $incidences);
+        $incidences = Incidence::paginate();
 
+        return view('incidence.index', compact('incidences'))
+            ->with('i', (request()->input('page', 1) - 1) * $incidences->perPage());
     
     }
 
@@ -38,16 +41,8 @@ class IncidenceController extends Controller
     public function create()
     {
         $incidence = new Incidence();
-        //Obtenemos los datos de las tablas relacionadas
-        $users = User::all();
-        $areas = Area::all();
-        $categories = Category::all();
-        $locations = Location::all();
-        $states = State::all();
-
-        //Retornamos la vista create.blade.php con los datos
-        return view('incidence.create')->with(compact('incidence','users', 'areas', 'categories', 'locations', 'states'));
         
+        return view('incidence.create', compact('incidence'));
     }
 
     /**

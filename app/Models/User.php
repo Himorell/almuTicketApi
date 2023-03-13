@@ -41,4 +41,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bookings()
+    {
+        return $this->belongsTo('App\Models\Booking', 'user_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function incidences()
+    {
+        return $this->belongsTo('App\Models\Incidence', 'user_id', 'id');
+    }
 }

@@ -39,7 +39,7 @@ class Category extends Model
      */
     public function incidences()
     {
-        return $this->hasMany('App\Models\Incidence', 'category_id', 'id');
+        return $this->belongsTo('App\Models\Incidence', 'category_id', 'id');
     }
 
 

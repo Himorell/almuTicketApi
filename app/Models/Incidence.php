@@ -55,7 +55,7 @@ class Incidence extends Model
      */
     public function area()
     {
-        return $this->hasOne('App\Models\Area', 'id', 'area_id');
+        return $this->hasMany('App\Models\Area', 'id', 'area_id');
     }
     
     /**
@@ -63,7 +63,7 @@ class Incidence extends Model
      */
     public function category()
     {
-        return $this->hasOne('App\Models\Category', 'id', 'category_id');
+        return $this->hasMany('App\Models\Category', 'id', 'category_id');
     }
     
     /**
@@ -71,7 +71,7 @@ class Incidence extends Model
      */
     public function location()
     {
-        return $this->hasOne('App\Models\Location', 'id', 'location_id');
+        return $this->hasMany('App\Models\Location', 'id', 'location_id');
     }
     
     /**
@@ -79,7 +79,7 @@ class Incidence extends Model
      */
     public function state()
     {
-        return $this->hasOne('App\Models\State', 'id', 'state_id');
+        return $this->hasMany('App\Models\State', 'id', 'state_id');
     }
     
     /**
@@ -87,7 +87,7 @@ class Incidence extends Model
      */
     public function user()
     {
-        return $this->hasOne('App\Models\User', 'id', 'user_id');
+        return $this->hasMany('App\Models\User', 'id', 'user_id');
     }
     
 
