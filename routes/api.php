@@ -2,7 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\StateController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\IncidenceController;
 
@@ -37,3 +40,13 @@ Route::put('/updateLocation/{id}', [LocationController::class,'update'])->name('
 Route::delete('/deleteLocation/{id}', [LocationController::class,'destroy'])->name('destroyLocationApi');
 
 
+Route::get('/areas', [AreaController::class, 'index'])->name('areasApi');
+Route::delete('/deleteArea/{id}', [AreaController::class, 'destroy'])->name('destroyAreaApi');
+Route::post('/createArea', [AreaController::class, 'store'])->name('createAreaApi');
+Route::put('/updateArea/{id}',[AreaController::class, 'update'])->name('updateAreaApi');
+
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categoriesApi');
+Route::delete('/deleteCategory/{id}', [CategoryController::class, 'destroy'])->name('destroyCategoryApi');
+Route::post('/createCategory', [CategoryController::class, 'store'])->name('createCategoryApi');
+Route::put('/updateCategory/{id}', [CategoryController::class, 'update'])->name('updateCategoryApi');

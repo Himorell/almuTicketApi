@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Category
  *
@@ -18,7 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Category extends Model
 {
-    
+    use HasFactory;
+
     static $rules = [
 		'name' => 'required',
     ];
@@ -40,6 +41,6 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Incidence', 'category_id', 'id');
     }
-    
+
 
 }

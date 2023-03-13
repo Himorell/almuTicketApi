@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Area
@@ -19,14 +20,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Area extends Model
 {
-    
+    use HasFactory;
+
     static $rules = [
-		'name' => 'required',
+        'name' => 'required',
     ];
 
     protected $perPage = 20;
 
-    /**
+        /**
      * Attributes that should be mass-assignable.
      *
      * @var array
@@ -41,7 +43,7 @@ class Area extends Model
     {
         return $this->hasMany('App\Models\Booking', 'area_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -49,6 +51,6 @@ class Area extends Model
     {
         return $this->hasMany('App\Models\Incidence', 'area_id', 'id');
     }
-    
+
 
 }

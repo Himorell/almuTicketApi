@@ -3,7 +3,7 @@
 namespace Tests\Feature\Api;
 
 use Tests\TestCase;
-use App\Models\location;
+use App\Models\Location;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -28,7 +28,7 @@ class ApiCRUDlocationsTest extends TestCase
 
     public function test_IfLocationsCreatedALocationInJsonFile()
     {
-        $response = $this->post(route('createLocationApi'), [ 
+        $response = $this->post(route('createLocationApi'), [
             'name' => 'Dos Aceras',
         ]);
 
@@ -39,7 +39,7 @@ class ApiCRUDlocationsTest extends TestCase
 
     public function test_IfLocationsUpdatedALocationInJsonFile()
     {
-        $response = $this->post(route('createLocationApi'), [ 
+        $response = $this->post(route('createLocationApi'), [
             'name' => 'Dos Aceras',
         ]);
 
@@ -47,15 +47,15 @@ class ApiCRUDlocationsTest extends TestCase
         $response = $this->get(route('locationsApi'));
         $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
 
-        // Agregamos el id del estado creado para poder realizar la actualización. 
+        // Agregamos el id del estado creado para poder realizar la actualización.
         $locationId = json_decode($response->getContent())[0]->id;
 
-        // Actualizamos el estado con el nuevo nombre. 
-        $response = $this->put(route('updateLocationApi', $locationId), [ 
+        // Actualizamos el estado con el nuevo nombre.
+        $response = $this->put(route('updateLocationApi', $locationId), [
             'name' => 'Nuevo',
         ]);
 
-        // Verificamos que se haya actualizado correctamente el estado. 
+        // Verificamos que se haya actualizado correctamente el estado.
         $data = ['name' => 'Nuevo'];
         $response = $this->get(route('locationsApi'));
         $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
