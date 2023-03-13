@@ -23,9 +23,9 @@ Route::get('/states', [StateController::class, 'index'])->name('statesApi');
 Route::delete('/deleteState/{id}',[StateController::class,'destroy'])->name('destroyStateApi');
 Route::post('/createState',[StateController::class,'store'])->name('createStateApi');
 
-// Rutas para location
-Route::get('/locations', [LocationController::class, 'index']); // Listar
-Route::get('/locations/{id}', [LocationController::class, 'show']); // Mostrar
-Route::post('/locations', [LocationController::class,'store']); // Crear
-// Route::put('/locations/{id}', [LocationController:class,'update']); // Actualizar
-// Route::delete('/locations/{id}', [LocationController:class,'destroy']); // Eliminar
+
+Route::get('/locations', [LocationController::class, 'index'])->name('locationsApi');
+Route::get('/locations/{id}', [LocationController::class, 'show'])->name('locationsApi');
+Route::post('/createLocation', [LocationController::class,'store'])->name('createLocationApi');
+Route::put('/updateLocation/{id}', [LocationController::class,'update'])->name('updateLocationApi');
+Route::delete('/deleteLocation/{id}', [LocationController::class,'destroy'])->name('destroyLocationApi'); 

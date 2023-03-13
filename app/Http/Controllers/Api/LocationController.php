@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class LocationController extends Controller
 {
@@ -12,7 +12,7 @@ class LocationController extends Controller
     public function index()
     {
         $locations = Location::all();
-        return response()->json($locations);
+        return response()->json($locations,200);
     }
 
     public function create()
@@ -50,6 +50,18 @@ class LocationController extends Controller
         $location->save();
 
         return response()->json($location);
+    }
+
+    public function destroy($id)
+    {
+        $location = Location::find($id);
+
+        if (!$location) {
+            return response()->json(['error' => 'Location not found'], 404);
+        }
+
+        $location->delete();
+        return response()->json(['message' => 'Location deleted successfully']);
     }
 
 }
