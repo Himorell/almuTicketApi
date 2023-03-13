@@ -26,7 +26,6 @@ Route::put('/updateState/{id}', [StateController::class, 'update'])->name('updat
 
 
 Route::get('/locations', [LocationController::class, 'index'])->name('locationsApi');
-Route::get('/locations/{id}', [LocationController::class, 'show'])->name('locationsApi');
 Route::post('/createLocation', [LocationController::class,'store'])->name('createLocationApi');
 Route::put('/updateLocation/{id}', [LocationController::class,'update'])->name('updateLocationApi');
 Route::delete('/deleteLocation/{id}', [LocationController::class,'destroy'])->name('destroyLocationApi');
