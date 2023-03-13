@@ -3,11 +3,9 @@
 namespace Tests\Feature\Api;
 
 use Tests\TestCase;
-
 use App\Models\Location;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ApiCRUDLocationsTest extends TestCase
 {
@@ -28,26 +26,26 @@ class ApiCRUDLocationsTest extends TestCase
         $this->assertDatabaseMissing('locations', ['id' => $location->id]);
     }
 
-    // public function test_IfLocationsCreatedALocationInJsonFile()
-    // {
-    //     $response = $this->post(route('createLocationApi'), [
-    //         'name' => 'Dos Aceras',
-    //     ]);
-
-    //     $data = ['name' => 'Dos Aceras'];
-    //     $response = $this->get(route('locationsApi'));
-    //     $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
-    // }
-
-    public function test_can_create_location()
+    public function test_IfLocationsCreatedALocationInJsonFile()
     {
-        $data = [
+        $response = $this->post(route('createLocationApi'), [
             'name' => 'Dos Aceras',
-        ];
-        $response = $this->postJson('/api/locations', $data);
-        $response->assertStatus(201)
-            ->assertJson($data);
+        ]);
+
+        $data = ['name' => 'Dos Aceras'];
+        $response = $this->get(route('locationsApi'));
+        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
     }
+
+    // public function test_can_create_location()
+    // {
+    //     $data = [
+    //         'name' => 'Dos Aceras',
+    //     ];
+    //     $response = $this->postJson('/api/locations', $data);
+    //     $response->assertStatus(201)
+    //         ->assertJson($data);
+    // }
 
     public function test_can_show_location()
     {
@@ -57,24 +55,42 @@ class ApiCRUDLocationsTest extends TestCase
             ->assertJson($location->toArray());
     }
 
-    public function test_can_update_location()
-    {
-        $location = Location::factory()->create();
-        $data = [
-            'name' => 'Dos Aceras',
-        ];
-        $response = $this->putJson("/api/locations/{$location->id}", $data);
-        $response->assertStatus(200)
-            ->assertJson($data);
-    }
 
-    // public function test_can_destroy_location()
+    // public function test_can_update_location()
     // {
     //     $location = Location::factory()->create();
-
-    //     $response = $this->deleteJson("/api/locations/{$location->id}");
-
+    //     $data = [
+    //         'name' => 'Dos Aceras',
+    //     ];
+    //     $response = $this->putJson("/api/locations/{$location->id}", $data);
     //     $response->assertStatus(200)
-    //         ->assertJson(['message' => 'Location deleted']);
+    //         ->assertJson($data);
     // }
+
+    //Himotestupdate
+    public function test_IfLocationsUpdatedALocationInJsonFile()
+    {
+        $response = $this->post(route('createLocationApi'), [
+            'name' => 'Dos Aceras',
+        ]);
+
+        $data = ['name' => 'Dos Aceras'];
+        $response = $this->get(route('locationsApi'));
+        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
+
+        // Agregamos el id del estado creado para poder realizar la actualización.
+        $locationId = json_decode($response->getContent())[0]->id;
+
+        // Actualizamos el estado con el nuevo nombre.
+        $response = $this->put(route('updateLocationApi', $locationId), [
+            'name' => 'Nuevo',
+        ]);
+
+        // Verificamos que se haya actualizado correctamente el estado.
+        $data = ['name' => 'Nuevo'];
+        $response = $this->get(route('locationsApi'));
+        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
+    }
+
+
 }
