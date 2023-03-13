@@ -36,4 +36,29 @@ class ApiCRUDStatesTest extends TestCase
         $response = $this->get(route('statesApi'));
         $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
     }
+
+    public function test_IfStatesUpdatedAStateInJsonFile()
+    {
+        $response = $this->post(route('createStateApi'), [ 
+            'name' => 'Emitido',
+        ]);
+
+        $data = ['name' => 'Emitido'];
+        $response = $this->get(route('statesApi'));
+        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
+
+        // Agregamos el id del estado creado para poder realizar la actualización. 
+        $stateId = json_decode($response->getContent())[0]->id;
+
+        // Actualizamos el estado con el nuevo nombre. 
+        $response = $this->put(route('updateStateApi', $stateId), [ 
+            'name' => 'Nuevo',
+        ]);
+
+        // Verificamos que se haya actualizado correctamente el estado. 
+        $data = ['name' => 'Nuevo'];
+        $response = $this->get(route('statesApi'));
+        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
+    }
+
 }

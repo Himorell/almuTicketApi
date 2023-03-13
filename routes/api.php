@@ -28,4 +28,8 @@ Route::get('/locations', [LocationController::class, 'index'])->name('locationsA
 Route::get('/locations/{id}', [LocationController::class, 'show'])->name('locationsApi');
 Route::post('/createLocation', [LocationController::class,'store'])->name('createLocationApi');
 Route::put('/updateLocation/{id}', [LocationController::class,'update'])->name('updateLocationApi');
-Route::delete('/deleteLocation/{id}', [LocationController::class,'destroy'])->name('destroyLocationApi'); 
+Route::delete('/deleteLocation/{id}', [LocationController::class,'destroy'])->name('destroyLocationApi');
+=======
+Route::post('/createState',[StateController::class,'store'])->name('createStateApi');
+Route::put('/updateState/{id}',[StateController::class,'update'])->name('updateStateApi');
+>>>>>>> crud
