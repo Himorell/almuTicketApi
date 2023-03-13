@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\IncidenceController;
 
 /*
@@ -43,3 +44,9 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 Route::delete('/deleteCategory/{id}', [CategoryController::class, 'destroy'])->name('destroyCategoryApi');
 Route::post('/createCategory', [CategoryController::class, 'store'])->name('createCategoryApi');
 Route::put('/updateCategory/{id}', [CategoryController::class, 'update'])->name('updateCategoryApi');
+
+
+Route::get('/users', [UserController::class, 'index'])->name('usersApi');
+Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('destroyUserApi');
+Route::post('/createUser', [UserController::class, 'store'])->name('createUserApi');
+Route::put('/updateUser/{id}', [UserController::class, 'update'])->name('updateUserApi');
