@@ -15,7 +15,7 @@ class IncidenceController extends Controller
     public function index()
     {
         $incidences = Incidence::all()->with(['category', 'area', 'user', 'location'])->paginate();
-    return response()->json($incidences);
+        return response()->json($incidences);
 
     }
 
