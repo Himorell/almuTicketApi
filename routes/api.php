@@ -20,10 +20,5 @@ use App\Http\Controllers\Api\IncidenceController;
 //Route::get('/', [IncidenceController::class, 'index'])->name('incidencesApi');
 Route::get('/states', [StateController::class, 'index'])->name('statesApi');
 Route::delete('/deleteState/{id}',[StateController::class,'destroy'])->name('destroyStateApi');
-<<<<<<< HEAD
-Route::post('/createState',[StateController::class,'store'])->name('createStateApi'); 
-
-=======
 Route::post('/createState',[StateController::class,'store'])->name('createStateApi');
 Route::put('/updateState/{id}',[StateController::class,'update'])->name('updateStateApi');
->>>>>>> crud
