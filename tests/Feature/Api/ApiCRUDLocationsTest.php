@@ -29,10 +29,10 @@ class ApiCRUDLocationsTest extends TestCase
     public function test_IfLocationsCreatedALocationInJsonFile()
     {
         $response = $this->post(route('createLocationApi'), [
-            'name' => 'Dos Aceras',
+            'name' => 'Dos',
         ]);
 
-        $data = ['name' => 'Dos Aceras'];
+        $data = ['name' => 'Dos'];
         $response = $this->get(route('locationsApi'));
         $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
     }
@@ -40,7 +40,7 @@ class ApiCRUDLocationsTest extends TestCase
     // public function test_can_create_location()
     // {
     //     $data = [
-    //         'name' => 'Dos Aceras',
+    //         'name' => 'Dos',
     //     ];
     //     $response = $this->postJson('/api/locations', $data);
     //     $response->assertStatus(201)
@@ -71,10 +71,10 @@ class ApiCRUDLocationsTest extends TestCase
     public function test_IfLocationsUpdatedALocationInJsonFile()
     {
         $response = $this->post(route('createLocationApi'), [
-            'name' => 'Dos Aceras',
+            'name' => 'Dos',
         ]);
 
-        $data = ['name' => 'Dos Aceras'];
+        $data = ['name' => 'Dos'];
         $response = $this->get(route('locationsApi'));
         $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
 

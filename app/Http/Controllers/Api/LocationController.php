@@ -45,11 +45,11 @@ class LocationController extends Controller
     public function update(Request $request, $id)
     {
         $location = Location::find($id);
-        $location->name = $request->input('name');
-        // Add other fields as needed
+        $location->update([
+            'name' => $request->name,
+        ]);
         $location->save();
-
-        return response()->json($location);
+        return response()->json($location, 200);
     }
 
     public function destroy($id)
