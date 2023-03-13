@@ -20,34 +20,14 @@
 
                     <div class="card-body">
                         
-                        <div class="form-group">
-                            <strong>User Id:</strong>
-                            {{ $incidence->user_id }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Area Id:</strong>
-                            {{ $incidence->area_id }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Category Id:</strong>
-                            {{ $incidence->category_id }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Location Id:</strong>
-                            {{ $incidence->location_id }}
-                        </div>
-                        <div class="form-group">
-                            <strong>State Id:</strong>
-                            {{ $incidence->state_id }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Title:</strong>
-                            {{ $incidence->title }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Description:</strong>
-                            {{ $incidence->description }}
-                        </div>
+                        <h3>Detalles de la incidencia</h1>
+                        <p>Usuario: {{ $incidence->user->name }}</p>
+                        <p>Área: {{ $incidence->area->name }}</p>
+                        <p>Categoría: {{ $incidence->category->name }}</p>
+                        <p>Ubicación: {{ $incidence->location->name }}</p>
+                        <p>Estado: {{ $incidence->state->name }}</p>
+                        <p>Título: {{ $incidence->title }}</p>
+                        <p>Descripción: {{ $incidence->description }}</p>
 
                     </div>
                 </div>
