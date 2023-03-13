@@ -1,68 +1,85 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Models\Incidence;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Api\Controller;
 
-// class IncidenceController extends Controller
-// {
-//     /**
-//      * Display a listing of the resource.
-//      */
-//     public function index()
-//     {
-    
-//         // $incidences = Incidence::get();
-//         // return response()->json($incidences,200);
-//     }
+class IncidenceController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $incidences = Incidence::all()->with(['category', 'area', 'user', 'location'])->paginate();
+    return response()->json($incidences);
 
-//     /**
-//      * Show the form for creating a new resource.
-//      */
-//     public function create()
-//     {
-//         //
-//     }
+    }
 
-//     /**
-//      * Store a newly created resource in storage.
-//      */
-//     public function store(Request $request)
-//     {
-//         //
-//     }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate(Incidence::$rules);
 
-//     /**
-//      * Display the specified resource.
-//      */
-//     public function show(string $id)
-//     {
-//         //
-//     }
+        $incidence = Incidence::create($validatedData);
+        return response()->json($incidence);
+    }
 
-//     /**
-//      * Show the form for editing the specified resource.
-//      */
-//     public function edit(string $id)
-//     {
-//         //
-//     }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $incidence = Incidence::with(['area', 'category', 'location', 'state', 'user'])->find($id);
+        if ($incidence) {
+            return response()->json($incidence);
+        } else {
+            return response()->json(['error' => '<EUGPSCoordinates>not found'], 404);
+        }
+    }
 
-//     /**
-//      * Update the specified resource in storage.
-//      */
-//     public function update(Request $request, string $id)
-//     {
-//         //
-//     }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $incidence = Incidence::find($id);
+        if ($incidence) {
+            // Agrega la regla "sometimes" a cada campo para que solo se valide si está presente en la solicitud
+            foreach (Incidence::$rules as &$rule) {
+                $rule = "sometimes|$rule";
+            }
+            unset($rule); // Elimina la referencia al último elemento
 
-//     /**
-//      * Remove the specified resource from storage.
-//      */
-//     public function destroy(string $id)
-//     {
-//         //
-//     }
-// }
+            $validatedData = $request->validate(Incidence::$rules);
+
+            $incidence->update($validatedData);
+            return response()->json($incidence);
+        } else {
+            return response()->json(['error' => '<EUGPSCoordinates>not found'], 404);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}
