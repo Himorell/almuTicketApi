@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\IncidenceController;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
