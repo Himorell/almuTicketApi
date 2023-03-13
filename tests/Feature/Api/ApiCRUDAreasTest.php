@@ -22,31 +22,12 @@ Use RefreshDatabase;
         $response->assertStatus(200)->assertJsonCount(2);
     }
 
-    //este seria el nuestro que no pasa
-    // public function test_IfAreasDeletedInJsonFile()
-    // {
-    //     $area = Area::factory()->create();
-    //     $response = $this->delete(route('destroyAreaApi', $area->id));
-    //     $response->assertStatus(200);
-    //     $this->assertDatabaseMissing('areas', ['id' => $area->id]);
-    // }
-
-    //y este es que me da el primo, es doble y pasa el segundo
-    public function testDestroy()
+    public function test_IfAreaDeletedInJsonFile()
     {
         $area = Area::factory()->create();
-
-        $response = $this->deleteJson("/api/areas/{$area->id}");
-
-        $response->assertNoContent();
+        $response = $this->delete(route('destroyAreaApi', $area->id));
+        $response->assertStatus(200);
         $this->assertDatabaseMissing('areas', ['id' => $area->id]);
-    }
-
-    public function testDestroyNonExistingArea()
-    {
-        $response = $this->deleteJson('/api/areas/123');
-
-        $response->assertNotFound();
     }
 
     public function test_CheckIfCanCreateAnAreaWhithJsonFile()

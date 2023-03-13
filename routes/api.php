@@ -35,4 +35,4 @@ Route::delete('/deleteLocation/{id}', [LocationController::class,'destroy'])->na
 Route::get('/areas', [AreaController::class, 'index'])->name('areasApi');
 Route::delete('/deleteArea/{id}', [AreaController::class, 'destroy'])->name('destroyAreaApi');
 Route::post('/createArea', [AreaController::class, 'store'])->name('createAreaApi');
-Route::put('/updateArea/{id}',[AreaController::class, 'area'])->name('createAreaApi');
+Route::put('/updateArea/{id}',[AreaController::class, 'update'])->name('updateAreaApi');

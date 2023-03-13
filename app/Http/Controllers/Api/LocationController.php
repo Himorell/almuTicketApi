@@ -32,8 +32,8 @@ class LocationController extends Controller
 
     public function show($id)
     {
-        $location = Location::find($id);
-        return response()->json($location);
+        // $location = Location::find($id);
+        // return response()->json($location);
     }
 
     public function edit($id)

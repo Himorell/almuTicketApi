@@ -35,9 +35,7 @@ class AreaController extends Controller
         $area = Area::create([
             'name' => $request->name,
         ]);
-
         $area->save();
-
         return response()->json($area, 200);
     }
 
@@ -76,32 +74,16 @@ class AreaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-
-        //este es nuestro y lo he cambiado por el del primo probando los test
-
-    // public function destroy(string $id)
-    // {
-    //     $area = Area::find($id);
-
-    //     if (!$area) {
-    //         return response()->json(['error' => 'Area not found'], 404);
-    //     }
-
-    //     $area->delete();
-    //     return response()->json(['message' => 'Area deleted successfully']);
-    // }
-
-        //este me lo ha dado el primo con el ha pasado uno de sus test
-    public function destroy(Area $area)
+    public function destroy($id)
     {
-        try {
-            $area->delete();
-            return response()->noContent();
-        } catch (ModelNotFoundException $e) {
-            return response()->notFound('Area not found');
-        } catch (\Exception $e) {
-            return response()->serverError('Unable to delete area');
+        $area = Area::find($id);
+
+        if (!$area) {
+            return response()->json(['error' => 'Area not found'], 404);
         }
+
+        $area->delete();
+        return response()->json(['message' => 'Area deleted successfully']);
     }
 
 }
