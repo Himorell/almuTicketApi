@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\Area;
 use App\Models\User;
+use App\Models\State;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Incidence;
@@ -13,9 +14,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ApiCRUDIncidencesTest extends TestCase
 {
+    use WithFaker, RefreshDatabase;
     /**
      * A basic feature test example.
      */
+
     public function test_IfIncidenceCreatedAIncidencesInJsonFile()
     {
         // Crear datos de prueba
@@ -23,12 +26,16 @@ class ApiCRUDIncidencesTest extends TestCase
     $area = Area::factory()->create();
     $user = User::factory()->create();
     $location = Location::factory()->create();
+    $state = State::factory()->create();
     
     Incidence::factory()->count(3)->create([
         'category_id' => $category->id,
         'area_id' => $area->id,
         'user_id' => $user->id,
-        'location_id' => $location->id
+        'location_id' => $location->id,
+        'title' => 'title',
+        'description' => 'description',
+        'state_id' => $state->id,
     ]);
 
     // Realizar la solicitud al método index
@@ -45,7 +52,10 @@ class ApiCRUDIncidencesTest extends TestCase
                 'category',
                 'area',
                 'user',
-                'location'
+                'location',
+                'title',
+                'description',
+                'state'
             ]
         ]
     ]);
