@@ -52,11 +52,11 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $incidence->user_id }}</td>
-											<td>{{ $incidence->area_id }}</td>
-											<td>{{ $incidence->category_id }}</td>
-											<td>{{ $incidence->location_id }}</td>
-											<td>{{ $incidence->state_id }}</td>
+											<td>{{ $incidence->user->name }}</td>
+											<td>{{ $incidence->area->name }}</td>
+											<td>{{ $incidence->category->name }}</td>
+											<td>{{ $incidence->location->name }}</td>
+											<td>{{ $incidence->state->name }}</td>
 											<td>{{ $incidence->title }}</td>
 											<td>{{ $incidence->description }}</td>
 
