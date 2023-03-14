@@ -47,7 +47,7 @@ class IncidenceController extends Controller
         $locations = Location::pluck('name', 'id');
         $areas = Area::pluck('name', 'id');
         
-        return view('incidences.create', compact('incidences','users','categories','areas','locations','states'));
+        return view('incidence.create', compact('incidences','users','categories','areas','locations','states'));
         
     }
 
@@ -73,7 +73,7 @@ class IncidenceController extends Controller
         $incidence = Incidence::create($request->all());
     
         //Retornamos una redirección a la vista show.blade.php con un mensaje de éxito
-        return redirect()->route('incidences.show', $incidence)->with('success', 'Incidencia creada correctamente.');
+        return redirect()->route('incidences.index', $incidence)->with('success', 'Incidencia creada correctamente.');
 
     }
 
@@ -86,10 +86,10 @@ class IncidenceController extends Controller
     public function show($incidence)
     {
         //Obtenemos la incidencia con sus relaciones
-        $incidence->load(['user', 'area', 'category', 'location', 'state']);
-
+        //$incidence->with(['user', 'area', 'category', 'location', 'state']);
+        $incidence = Incidence::with(['user', 'area', 'category', 'location', 'state'])->findOrFail($incidence);
     //Retornamos la vista show.blade.php con los datos
-        return view('incidences.show')->with(compact('incidence'));
+        return view('incidence.show')->with(compact('incidence'));
     }
 
     /**
@@ -136,7 +136,7 @@ class IncidenceController extends Controller
     $incidence->update($request->all());
 
     //Retornamos una redirección a la vista show.blade.php con un mensaje de éxito
-    return redirect()->route('incidences.show', $incidence)->with('success', 'Incidencia actualizada correctamente.');
+    return redirect()->route('incidences.index', $incidence)->with('success', 'Incidencia actualizada correctamente.');
     }
 
     /**

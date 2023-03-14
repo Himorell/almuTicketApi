@@ -1,11 +1,7 @@
 <div class="box box-info padding-1">
     <div class="box-body">
         
-        <div class="form-group">
-            {{ Form::label('user_id') }}
-            {{ Form::select('user_id', $incidence->user_id, ['class' => 'form-control' . ($errors->has('user_id') ? ' is-invalid' : ''), 'placeholder' => 'User Id']) }}
-            {!! $errors->first('user_id', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+        
         <div class="form-group">
             <label for="user">Usuario</label>
             {!! Form::select('user_id', $users, null, ['class' => 'form-control', 'name' => 'user_id']) !!}
@@ -24,12 +20,12 @@
         </div>
         <div class="form-group">
             {{ Form::label('title') }}
-            {{ Form::text('title', $incidence->title, ['class' => 'form-control' . ($errors->has('title') ? ' is-invalid' : ''), 'placeholder' => 'Title']) }}
+            {{ Form::text('title', $incidences->title, ['class' => 'form-control' . ($errors->has('title') ? ' is-invalid' : ''), 'placeholder' => 'Title']) }}
             {!! $errors->first('title', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('description') }}
-            {{ Form::text('description', $incidence->description, ['class' => 'form-control' . ($errors->has('description') ? ' is-invalid' : ''), 'placeholder' => 'Description']) }}
+            {{ Form::text('description', $incidences->description, ['class' => 'form-control' . ($errors->has('description') ? ' is-invalid' : ''), 'placeholder' => 'Description']) }}
             {!! $errors->first('description', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
