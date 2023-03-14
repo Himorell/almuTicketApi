@@ -30,7 +30,6 @@ class IncidenceController extends Controller
 
         return view('incidence.index', compact('incidences'))
             ->with('i', (request()->input('page', 1) - 1) * $incidences->perPage());
-    
     }
 
     /**
