@@ -82,20 +82,26 @@ This web application will allow to generate tickets with requests, incidents and
 </div>
 
 <h2>7. Final Design</h2>
-<h4>Mobile View</h4>
+<h3>7.1 Mobile View</h3>
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225414018-1e6cbf5b-dc98-4c2d-ab3d-bf0d3b055900.png" alt="Mobile View 1"/>
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225414427-9e1ff808-1a49-4a9e-ade1-7a5bc6145ec1.png" alt="Mobile View 2"/>
 </div>
 
-<h4>Computer views (Common administrator and user)</h4>
+<h3>7.2 Computer views (Common administrator and user)</h3>
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225418149-a84e987b-58a5-419b-9393-70a2f369ec79.png" alt="Register"/>
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225418340-08799744-9b5a-4699-8d88-bd26b3a2a738.png" alt="Ingress"/>
-<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225418475-142b99c0-fe13-4d21-b445-d05ea4691e56.png" alt="Generate Ticket"/>
+<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225423555-5c64ae07-e252-49ab-a471-a4a2ca5f8d51.png" alt="Generate Ticket"/>
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225418659-c80e4f9a-321a-49ff-a647-819c353c8857.png" alt="Tickets List"/>
 </div>
 
+<h3>7.3 Exclusive administrator view</h3>
+<div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
+<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225421792-6eb20698-2b50-49af-9703-8a4658fa8769.png" alt="Tickets List"/>
+<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225422498-98d13650-2e27-4517-a83f-88200879543e.png" alt="Gestion Reservs"/>
+<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225422811-45da6340-9318-4924-8425-3bc60a0b43c7.png" alt="Gestion Incidences"/>
+</div>
 
 <h2>8. Stacks and technologies</h2>
 
