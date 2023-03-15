@@ -2,67 +2,130 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Area;
+use App\Models\User;
+use App\Models\State;
+use App\Models\Category;
+use App\Models\Location;
 use App\Models\Incidence;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Api\Controller;
+use App\Http\Controllers\Controller;
 
-// class IncidenceController extends Controller
-// {
-//     /**
-//      * Display a listing of the resource.
-//      */
-//     public function index()
-//     {
-    
-//         // $incidences = Incidence::get();
-//         // return response()->json($incidences,200);
-//     }
+class IncidenceController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $incidences = Incidence::with(['users', 'areas', 'categories', 'locations', 'states'])->paginate();
 
-//     /**
-//      * Show the form for creating a new resource.
-//      */
-//     public function create()
-//     {
-//         //
-//     }
+        return response()->json($incidences);
+    }
 
-//     /**
-//      * Store a newly created resource in storage.
-//      */
-//     public function store(Request $request)
-//     {
-//         //
-//     }
+    public function create()
+    {
+        $incidences = new Incidence();
+        $users = User::pluck('name', 'id');
+        $categories = Category::pluck('name', 'id');
+        $states = State::pluck('name', 'id');
+        $locations = Location::pluck('name', 'id');
+        $areas = Area::pluck('name', 'id');
 
-//     /**
-//      * Display the specified resource.
-//      */
-//     public function show(string $id)
-//     {
-//         //
-//     }
+        return response()->json([
+            'incidences' => $incidences,
+            'users' => $users,
+            'categories' => $categories,
+            'states' => $states,
+            'locations' => $locations,
+            'areas' => $areas
+        ]);
+    }
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+            $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'area_id' => 'required|exists:areas,id',
+            'category_id' => 'required|exists:categories,id',
+            'location_id' => 'required|exists:locations,id',
+            'state_id' => 'required|exists:states,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string'
+        ]);
 
-//     /**
-//      * Show the form for editing the specified resource.
-//      */
-//     public function edit(string $id)
-//     {
-//         //
-//     }
+            $incidences = Incidence::create($request->all());
 
-//     /**
-//      * Update the specified resource in storage.
-//      */
-//     public function update(Request $request, string $id)
-//     {
-//         //
-//     }
+            return response()->json([
+            'success' => true,
+            'message' => 'Incidencia creada correctamente.',
+            'data' => $incidences
+        ]);
+    }
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+    $incidence = Incidence::find($id);
 
-//     /**
-//      * Remove the specified resource from storage.
-//      */
-//     public function destroy(string $id)
-//     {
-//         //
-//     }
-// }
+    return response()->json($incidence);
+    }
+
+    public function edit($id)
+    {
+        $incidences = Incidence::find($id);
+        $users = User::all();
+        $areas = Area::all();
+        $categories = Category::all();
+        $locations = Location::all();
+        $states = State::all();
+
+            return response()->json([
+            'incidences' => $incidences,
+            'users' => $users,
+            'areas' => $areas,
+            'categories' => $categories,
+            'locations' => $locations,
+            'states' => $states
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Incidence $incidences)
+    {
+            $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'area_id' => 'required|exists:areas,id',
+            'category_id' => 'required|exists:categories,id',
+            'location_id' => 'required|exists:locations,id',
+            'state_id' => 'required|exists:states,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string'
+        ]);
+
+        $incidences->update($request->all());
+
+            return response()->json([
+            'success' => true,
+            'message' => 'Incidencia actualizada correctamente.',
+            'data' => $incidences
+        ]);
+    }
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        $incidences = Incidence::find($id)->delete();
+
+            return response()->json([
+            'success' => true,
+            'message' => 'Incidencia eliminada correctamente.'
+        ]);
+    }
+}
