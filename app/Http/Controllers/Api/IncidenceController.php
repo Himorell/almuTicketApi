@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Area;
 use App\Models\User;
@@ -9,102 +9,124 @@ use App\Models\Category;
 use App\Models\Location;
 use App\Models\Incidence;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class IncidenceController extends Controller
 {
+
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $incidences = Incidence::all()->with(['category', 'area', 'user', 'location'])->paginate();
+        //$incidences = Incidence::with(['users', 'areas', 'categories', 'locations', 'states'])->paginate();
+        $incidences = Incidence::all();
         return response()->json($incidences);
-
     }
 
+    public function create()
+    {
+        $incidences = new Incidence();
+        $users = User::pluck('name', 'id');
+        $categories = Category::pluck('name', 'id');
+        $states = State::pluck('name', 'id');
+        $locations = Location::pluck('name', 'id');
+        $areas = Area::pluck('name', 'id');
+
+        return response()->json([
+            'incidences' => $incidences,
+            'users' => $users,
+            'categories' => $categories,
+            'states' => $states,
+            'locations' => $locations,
+            'areas' => $areas
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    
-        public function create()
-        {
-            $incidences = new Incidence();
-            $users = User::pluck('name', 'id');
-            $categories = Category::pluck('name', 'id');
-            $states = State::pluck('name', 'id');
-            $locations = Location::pluck('name', 'id');
-            $areas = Area::pluck('name', 'id');
-        
-            return response()->json([
-                'incidences' => $incidences,
-                'users' => $users,
-                'categories' => $categories,
-                'states' => $states,
-                'locations' => $locations,
-                'areas' => $areas
-            ]);
-        }
-    
-     public function store(Request $request)
+    public function store(Request $request)
     {
-        $validatedData = $request->validate(Incidence::$rules);
+            $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'area_id' => 'required|exists:areas,id',
+            'category_id' => 'required|exists:categories,id',
+            'location_id' => 'required|exists:locations,id',
+            'state_id' => 'required|exists:states,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string'
+        ]);
 
-        $incidence = Incidence::create($validatedData);
-        return response()->json($incidence);
+            $incidences = Incidence::create($request->all());
+
+            return response()->json([
+            'success' => true,
+            'message' => 'Incidencia creada correctamente.',
+            'data' => $incidences
+        ]);
     }
-
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $incidence = Incidence::with(['area', 'category', 'location', 'state', 'user'])->find($id);
-        if ($incidence) {
-            return response()->json($incidence);
-        } else {
-            return response()->json(['error' => '<EUGPSCoordinates>not found'], 404);
-        }
+    $incidence = Incidence::find($id);
+
+    return response()->json($incidence);
+    }
+
+    public function edit($id)
+    {
+        $incidences = Incidence::find($id);
+        $users = User::all();
+        $areas = Area::all();
+        $categories = Category::all();
+        $locations = Location::all();
+        $states = State::all();
+
+            return response()->json([
+            'incidences' => $incidences,
+            'users' => $users,
+            'areas' => $areas,
+            'categories' => $categories,
+            'locations' => $locations,
+            'states' => $states
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Incidence $incidences)
     {
-        $incidence = Incidence::find($id);
-        if ($incidence) {
-            // Agrega la regla "sometimes" a cada campo para que solo se valide si está presente en la solicitud
-            foreach (Incidence::$rules as &$rule) {
-                $rule = "sometimes|$rule";
-            }
-            unset($rule); // Elimina la referencia al último elemento
+            $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'area_id' => 'required|exists:areas,id',
+            'category_id' => 'required|exists:categories,id',
+            'location_id' => 'required|exists:locations,id',
+            'state_id' => 'required|exists:states,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string'
+        ]);
 
-            $validatedData = $request->validate(Incidence::$rules);
+        $incidences->update($request->all());
 
-            $incidence->update($validatedData);
-            return response()->json($incidence);
-        } else {
-            return response()->json(['error' => '<EUGPSCoordinates>not found'], 404);
-        }
+            return response()->json([
+            'success' => true,
+            'message' => 'Incidencia actualizada correctamente.',
+            'data' => $incidences
+        ]);
     }
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $incidences = Incidence::find($id)->delete();
+
+            return response()->json([
+            'success' => true,
+            'message' => 'Incidencia eliminada correctamente.'
+        ]);
     }
 }
