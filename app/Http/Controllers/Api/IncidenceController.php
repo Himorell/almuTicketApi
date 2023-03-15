@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
+use App\Models\User;
+use App\Models\State;
+use App\Models\Category;
+use App\Models\Location;
 use App\Models\Incidence;
 use Illuminate\Http\Request;
 
@@ -25,7 +30,27 @@ class IncidenceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    
+        public function create()
+        {
+            $incidences = new Incidence();
+            $users = User::pluck('name', 'id');
+            $categories = Category::pluck('name', 'id');
+            $states = State::pluck('name', 'id');
+            $locations = Location::pluck('name', 'id');
+            $areas = Area::pluck('name', 'id');
+        
+            return response()->json([
+                'incidences' => $incidences,
+                'users' => $users,
+                'categories' => $categories,
+                'states' => $states,
+                'locations' => $locations,
+                'areas' => $areas
+            ]);
+        }
+    
+     public function store(Request $request)
     {
         $validatedData = $request->validate(Incidence::$rules);
 

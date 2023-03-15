@@ -23,10 +23,10 @@ class IncidenceController extends Controller
      */
     public function index()
     {
-        //$incidences = Incidence::with(['user', 'area', 'category', 'location', 'state'])->paginate();
+        $incidences = Incidence::with(['users', 'areas', 'categories', 'locations', 'states'])->paginate();
         //return view('incidence.index')->with('incidences', $incidences);
 
-        $incidences = Incidence::paginate();
+        //$incidences = Incidence::paginate();
 
         return view('incidence.index', compact('incidences'))
             ->with('i', (request()->input('page', 1) - 1) * $incidences->perPage());
