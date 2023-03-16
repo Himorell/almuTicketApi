@@ -13,9 +13,12 @@ class ApiCRUDIncidenceTest extends TestCase
 
     public function test_CheckIfIncidencesListedInJsonFile()
     {
-        Incidence::factory(2)->create();
-        $response = $this->get(route('incidencesApi'));
-        $response->assertStatus(200)->assertJsonCount(2);
+        
+
+        Incidence::factory()->count(2)->create();
+        $response = $this->getJson('incidences');
+        $response->assertStatus(200);
+        $response->assertJsonCount(2);
     }
 
     public function test_CheckIfCanCreateAnIncidenceWhithJsonFile()
