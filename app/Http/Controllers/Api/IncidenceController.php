@@ -58,12 +58,14 @@ class IncidenceController extends Controller
         ]);
 
             $incidences = Incidence::create($request->all());
+            $incidences->save();
 
             return response()->json([
             'success' => true,
             'message' => 'Incidencia creada correctamente.',
             'data' => $incidences
-        ]);
+        ],200);
+        
     }
     /**
      * Display the specified resource.
