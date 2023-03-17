@@ -3,6 +3,11 @@
 namespace Database\Factories;
 
 
+use App\Models\Area;
+use App\Models\User;
+use App\Models\State;
+use App\Models\Category;
+use App\Models\Location;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,16 +23,17 @@ class BookingFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' =>fake()->user_id(),
-            'area_id' => fake()->area_id(),
-            'location_id' => fake()->location_id(),
-            'state_id' => fake()->state_id(),
+            'user_id' => User::factory(),
+            'area_id' => Area::factory(),
+            'category_id' => Category::factory(),
+            'location_id' => Location::factory(),
+            'state_id' => State::factory(),
             'date' => fake()->date(),
-            'startTime' => fake()->starTime(),
-            'endTime' => fake()->endTime(),
-            'numPeople' => fake()->numPeople(),
-            'room' => fake()->room(),
-            'description' => fake()->description(),
+            'startTime' => fake()->time(),
+            'endTime' => fake()->time(),
+            'numPeople' => fake()->integer(),
+            'room' => fake()->name(),
+            'description' => fake()->paragraph(),
         ];
     }
 }
