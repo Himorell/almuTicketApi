@@ -102,19 +102,14 @@ class IncidenceController extends Controller
     public function update(Request $request, Incidence $incidences, $id)
     {
             $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'area_id' => 'required|exists:areas,id',
-            'category_id' => 'required|exists:categories,id',
-            'location_id' => 'required|exists:locations,id',
             'state_id' => 'required|exists:states,id',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string'
+            'comment' => 'incidence is updated'
         ]);
 
             $incidence = Incidence::find($id);
             $incidence->update([
-                'state_id' => 'required|exists:states,id',
-                'comment' => 'required|string|max:255',
+                'state_id' => $request->state_id,
+                'comment' => $request->comment,
         ]);
         $incidence->save();
 
