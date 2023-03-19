@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\State;
 use App\Models\Category;
 use App\Models\Location;
+use App\Models\Incidence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -133,5 +134,29 @@ class DatabaseSeeder extends Seeder
         Area::create([
             'name' => 'Recepcion Galaxia',
         ]);
+
+
+        Incidence::factory()->count(10)->create();
+
+        Incidence::create([
+            'user_id' => 1,
+            'area_id' => 2,
+            'category_id' =>3,
+            'location_id' => 4,
+            'state_id' => 2,
+            'title' => 'sentence',
+            'description' => 'paragraph',
+        ]);
+
+        Incidence::create([
+            'user_id' => 1,
+            'area_id' => 2,
+            'category_id' =>3,
+            'location_id' => 4,
+            'state_id' => 2,
+            'title' => 'Prueba',
+            'description' => 'Probando seeder 2',
+        ]);
+
     }
 }

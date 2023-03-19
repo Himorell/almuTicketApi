@@ -99,7 +99,7 @@ class IncidenceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Incidence $incidences)
+    public function update(Request $request, Incidence $incidences, $id)
     {
             $request->validate([
             'user_id' => 'required|exists:users,id',
@@ -111,13 +111,19 @@ class IncidenceController extends Controller
             'description' => 'required|string'
         ]);
 
-        $incidences->update($request->all());
+            $incidence = Incidence::find($id);
+            $incidence->update([
+                'state_id' => 'required|exists:states,id',
+                'comment' => 'required|string|max:255',
+        ]);
+        $incidence->save();
 
             return response()->json([
             'success' => true,
             'message' => 'Incidencia actualizada correctamente.',
             'data' => $incidences
-        ]);
+        ],200);
+
     }
     /**
      * Remove the specified resource from storage.
