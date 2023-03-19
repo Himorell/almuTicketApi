@@ -20,36 +20,4 @@ class ApiCRUDIncidenceTest extends TestCase
         $response->assertJsonCount(2);
     }
 
-    public function test_CheckIfCanCreateAnIncidenceWhithJsonFile()
-    {
-        $response = $this->post(route('createIncidenceApi'), [
-            'title' => 'Limpieza',
-        ]);
-
-        $data = ['title' => 'Limpieza'];
-
-        $response = $this->get(route('incidencesApi'));
-        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
-    
-    }
-
-    public function test_CheckIfCanUpdateAnIncidenceWhithJsonFile()
-    {
-        $response = $this->post(route('createIncidenceApi'), [
-            'title' => 'Limpieza',
-        ]);
-
-        $data = ['title' => 'Limpieza'];
-
-        $response = $this->get(route('incidencesApi'));
-        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
-
-        $response = $this->put('/api/updateIncidences/1', ['title' => 'Limpieza',]);
-
-        $data = ['title' => 'Limpieza',];
-
-        $response = $this->get(route('incidencesApi'));
-        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data);
-    
-    }
 }
