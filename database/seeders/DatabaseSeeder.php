@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Area;
 use App\Models\User;
 use App\Models\State;
+use App\Models\Booking;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Incidence;
@@ -156,6 +157,22 @@ class DatabaseSeeder extends Seeder
             'state_id' => 2,
             'title' => 'Prueba',
             'description' => 'Probando seeder 2',
+        ]);
+
+        Booking::factory()->count(10)->create();
+
+        Booking::create([
+            'user_id' => 1,
+            'area_id' => 1,
+            'location_id' => 1,
+            'state_id' => 1,
+            'date' => '2023-01-01',
+            'startTime' => '00:01',
+            'endTime' => '00:01',
+            'numPeople' => 3,
+            'room' => 'name',
+            'description' => 'paragraph',
+            'comment' => 'comment',
         ]);
 
     }

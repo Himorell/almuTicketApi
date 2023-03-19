@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('area_id');
             $table->unsignedBigInteger('location_id');
@@ -24,8 +25,8 @@ return new class extends Migration
             $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade')->onUpdate('cascade'); 
 
             $table->date('date');
-            $table->datetime('startTime');
-            $table->datetime('endTime');
+            $table->time('startTime');
+            $table->time('endTime');
             $table->integer('numPeople');
             $table->string('room');
             $table->string('description');
