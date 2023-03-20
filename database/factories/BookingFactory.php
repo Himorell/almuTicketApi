@@ -2,37 +2,27 @@
 
 namespace Database\Factories;
 
-
-use App\Models\Area;
-use App\Models\User;
-use App\Models\State;
-use App\Models\Category;
-use App\Models\Location;
+use App\Models\Booking;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
- */
 class BookingFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = Booking::class;
+
+    public function definition()
     {
         return [
-            'user_id' => User::factory(),
-            'area_id' => Area::factory(),
-            'location_id' => Location::factory(),
-            'state_id' => State::factory(),
-            'date' => fake()->date($format = 'Y-m-d', $max = 'now'),
-            'startTime' => fake()->time($format = 'H:i', $max = 'now'),
-            'endTime' => fake()->time($format = 'H:i', $max = 'now'),
-            'numPeople' => fake()->integer(),
-            'room' => fake()->name(),
-            'description' => fake()->paragraph(),
+            'user_id' => $this->faker->numberBetween(1, 10),
+            'area_id' => $this->faker->numberBetween(1, 15),
+            'location_id' => $this->faker->numberBetween(1, 6),
+            'state_id' => $this->faker->numberBetween(1, 6),
+            'date' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
+            'startTime' => $this->faker->time($format = 'H:i', $max = 'now'),
+            'endTime' => $this->faker->time($format = 'H:i', $max = 'now'),
+            'numPeople' => $this->faker->numberBetween(1, 20),
+            'room' => $this->faker->name(),
+            'description' => $this->faker->sentence,
+            'comment' => $this->faker->sentence,
         ];
     }
 }

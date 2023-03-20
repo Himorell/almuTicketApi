@@ -148,6 +148,7 @@ class DatabaseSeeder extends Seeder
             'numPeople' => 3,
             'room' => 'name',
             'description' => 'paragraph',
+            'comment' => 'comment',
         ]);
     }
 }

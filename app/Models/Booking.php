@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Booking
@@ -31,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Booking extends Model
 {
+    use HasFactory;
     
     static $rules = [
 		'user_id' => 'required',
@@ -62,7 +64,7 @@ class Booking extends Model
     {
         return $this->hasOne('App\Models\Area', 'id', 'area_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -70,7 +72,7 @@ class Booking extends Model
     {
         return $this->hasOne('App\Models\Location', 'id', 'location_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -78,7 +80,7 @@ class Booking extends Model
     {
         return $this->hasOne('App\Models\State', 'id', 'state_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -86,6 +88,6 @@ class Booking extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
-    
+
 
 }

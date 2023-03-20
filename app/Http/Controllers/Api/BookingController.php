@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers\Api;
 
-
 use App\Models\Booking;
+use App\Models\Area;
+use App\Models\User;
+use App\Models\State;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class BookingController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $bookings = Booking::get();
-        return response()->json($bookings,200);
+        $bookings = Booking::all();
+        return response()->json($bookings, 200); //revisar si incluir status 200 o no
     }
 
     /**
@@ -20,7 +26,19 @@ class BookingController extends Controller
      */
     public function create()
     {
-        //
+        $booking = new Booking();
+        $users = User::pluck('name', 'id');
+        $states = State::pluck('name', 'id');
+        $locations = Location::pluck('name', 'id');
+        $areas = Area::pluck('name', 'id');
+
+        return response()->json([
+            'booking' => $booking,
+            'users' => $users,
+            'states' => $states,
+            'locations' => $locations,
+            'areas' => $areas
+        ]);
     }
 
     /**
@@ -28,20 +46,30 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        $booking = Booking::create([
-            'user_id' => $request->user_id,
-            'area_id' => $request->area_id,
-            'location_id' => $request->location_id,
-            'state_id' => $request->state_id,
-            'date' => $request->date,
-            'startTime' => $request->startTime,
-            'endTime' => $request->endTime,
-            'numPeople' => $request->numPeople,
-            'room' => $request->room,
-            'description' => $request->description,
+
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'area_id' => 'required|exists:areas,id',
+            'location_id' => 'required|exists:locations,id',
+            'state_id' => 'required|exists:states,id',
+            'date' => 'required',
+            'startTime' => 'required',
+            'endTime' => 'required',
+            'numPeople' => 'required',
+            'room' => 'required',
+            'description' => 'required|string',
+            'comment' => 'string|max:255',
+
         ]);
+
+        $booking = Booking::create($request->all());
         $booking->save();
-        return response()->json($booking, 200);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Incidencia creada correctamente.',
+            'data' => $booking
+        ], 200);
     }
 
     /**
@@ -67,17 +95,10 @@ class BookingController extends Controller
     {
         $booking = Booking::find($id);
 
-        $booking ->update([
-            'user_id' => $request->user_id,
-            'area_id' => $request->area_id,
-            'location_id' => $request->location_id,
+        $booking->update([
+
             'state_id' => $request->state_id,
-            'date' => $request->date,
-            'startTime' => $request->startTime,
-            'endTime' => $request->endTime,
-            'numPeople' => $request->numPeople,
-            'room' => $request->room,
-            'description' => $request->description,
+            'comment' => $request->comment,
         ]);
 
         $booking->save();
@@ -88,7 +109,7 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         $booking = Booking::find($id);
 
@@ -97,7 +118,6 @@ class BookingController extends Controller
         }
 
         $booking->delete();
-        return response()->json(['message' => 'Booking deleted successfully']);
+        return response()->json(['message' => 'La reserva fue eliminada correctamente']);
     }
-
 }
