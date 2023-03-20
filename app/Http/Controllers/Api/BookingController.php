@@ -12,18 +12,12 @@ use App\Http\Controllers\Controller;
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $bookings = Booking::all();
-        return response()->json($bookings, 200); //revisar si incluir status 200 o no
+        return response()->json($bookings, 200); 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $booking = new Booking();
@@ -40,13 +34,8 @@ class BookingController extends Controller
             'areas' => $areas
         ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'area_id' => 'required|exists:areas,id',
@@ -59,7 +48,6 @@ class BookingController extends Controller
             'room' => 'required',
             'description' => 'required|string',
             'comment' => 'string|max:255',
-
         ]);
 
         $booking = Booking::create($request->all());
@@ -72,25 +60,9 @@ class BookingController extends Controller
         ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+    public function show(string $id){}
+    public function edit(string $id){}
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $booking = Booking::find($id);
@@ -105,10 +77,6 @@ class BookingController extends Controller
 
         return response()->json($booking, 200);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $booking = Booking::find($id);
