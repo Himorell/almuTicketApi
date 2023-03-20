@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AreaController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\TicketController;
@@ -22,6 +23,23 @@ use App\Http\Controllers\Api\IncidenceController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::post('myUser', [AuthController::class, 'myUser'])->name('profile');
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('home', [UserController::class, 'home'])->name('home');
+
+});
+
 
 //Route::get('/', [IncidenceController::class, 'index'])->name('incidencesApi');
 Route::get('/tickets', [TicketController::class, 'index'])->name('ticketsApi');
@@ -61,7 +79,7 @@ Route::post('/createCategory', [CategoryController::class, 'store'])->name('crea
 Route::put('/updateCategory/{id}', [CategoryController::class, 'update'])->name('updateCategoryApi');
 
 
-Route::get('/users', [UserController::class, 'index'])->name('usersApi');
-Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('destroyUserApi');
-Route::post('/createUser', [UserController::class, 'store'])->name('createUserApi');
-Route::put('/updateUser/{id}', [UserController::class, 'update'])->name('updateUserApi');
+// Route::get('/users', [UserController::class, 'index'])->name('usersApi');
+// Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('destroyUserApi');
+// Route::post('/createUser', [UserController::class, 'store'])->name('createUserApi');
+// Route::put('/updateUser/{id}', [UserController::class, 'update'])->name('updateUserApi');
