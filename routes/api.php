@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AreaController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\StateController;
+use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\LocationController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\Api\IncidenceController;
 */
 
 //Route::get('/', [IncidenceController::class, 'index'])->name('incidencesApi');
+Route::get('/tickets', [TicketController::class, 'index'])->name('ticketsApi');
 Route::get('/incidences', [IncidenceController::class, 'index'])->name('incidencesApi');
 Route::delete('/deleteIncidence/{id}', [IncidenceController::class, 'destroy'])->name('destroyIncidenceApi');
 Route::post('/createIncidence', [IncidenceController::class, 'store'])->name('createIncidenceApi');

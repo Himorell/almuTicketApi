@@ -121,4 +121,13 @@ class BookingController extends Controller
         $booking->delete();
         return response()->json(['message' => 'La reserva fue eliminada correctamente']);
     }
+
+    public function getBookings()
+    {
+        // Obtener todas las incidencias de la base de datos
+        $bookings = Booking::all();
+
+        // Devolver la colección de incidencias
+        return $bookings;
+    }
 }

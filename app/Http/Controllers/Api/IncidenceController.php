@@ -122,4 +122,13 @@ class incidenceController extends Controller
         $incidence->delete();
         return response()->json(['message' => 'La reserva fue eliminada correctamente']);
     }
+
+    public function getIncidences()
+    {
+        // Obtener todas las incidencias de la base de datos
+        $incidences = Incidence::all();
+
+        // Devolver la colección de incidencias
+        return $incidences;
+    }
 }
