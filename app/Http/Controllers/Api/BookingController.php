@@ -118,6 +118,10 @@ class BookingController extends Controller
             return response()->json(['error' => 'Booking not found'], 404);
         }
 
+        if ($booking->state_id != 1) {
+            return response()->json(['error' => 'No se puede eliminar la reserva porque ha sido vista'], 400);
+        }
+
         $booking->delete();
         return response()->json(['message' => 'La reserva fue eliminada correctamente']);
     }

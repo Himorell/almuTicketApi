@@ -119,9 +119,14 @@ class incidenceController extends Controller
             return response()->json(['error' => 'incidence not found'], 404);
         }
 
+        // Verificar si el estado de la incidencia es "emitido"
+        if ($incidence->state_id != 1) {
+            return response()->json(['error' => 'No se puede eliminar la incidencia porque ha sido vista'], 400);
+        }
+
         $incidence->delete();
-        return response()->json(['message' => 'La reserva fue eliminada correctamente']);
-    }
+        return response()->json(['message' => 'La incidencia fue eliminada correctamente']);
+        }
 
     public function getIncidences()
     {
