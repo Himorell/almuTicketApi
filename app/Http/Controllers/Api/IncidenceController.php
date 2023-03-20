@@ -62,6 +62,7 @@ class incidenceController extends Controller
             'comment' => 'string|max:255',
             
         ]);
+        
         $incidence = Incidence::create($request->all());
         $incidence->save();
 
