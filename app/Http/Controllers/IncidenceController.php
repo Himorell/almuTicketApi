@@ -23,11 +23,13 @@ class IncidenceController extends Controller
      */
     public function index()
     {
-        $incidences = Incidence::with(['user', 'area', 'category', 'location', 'state'])->paginate();
+        $incidences = Incidence::with(['users', 'areas', 'categories', 'locations', 'states'])->paginate();
+        //return view('incidence.index')->with('incidences', $incidences);
 
-        return view('incidence.index')->with('incidences', $incidences);
+        //$incidences = Incidence::paginate();
 
-
+        return view('incidence.index', compact('incidences'))
+            ->with('i', (request()->input('page', 1) - 1) * $incidences->perPage());
     }
 
     /**
@@ -38,7 +40,6 @@ class IncidenceController extends Controller
     //
     public function create()
     {
-
         $incidences = new Incidence();
         $users = User::pluck('name', 'id');
         $categories = Category::pluck('name', 'id');
@@ -72,6 +73,9 @@ class IncidenceController extends Controller
 
         //Retornamos una redirección a la vista show.blade.php con un mensaje de éxito
         return redirect()->route('incidences.index', $incidence)->with('success', 'Incidencia creada correctamente.');
+
+        //Retornamos una redirección a la vista show.blade.php con un mensaje de éxito
+        return redirect()->route('incidences.index', $incidence)->with('success', 'Incidencia creada correctamente.');
     }
 
     /**
@@ -83,10 +87,10 @@ class IncidenceController extends Controller
     public function show($incidence)
     {
         //Obtenemos la incidencia con sus relaciones
-        $incidence->load(['user', 'area', 'category', 'location', 'state']);
-
+        //$incidence->with(['user', 'area', 'category', 'location', 'state']);
+        $incidence = Incidence::with(['user', 'area', 'category', 'location', 'state'])->findOrFail($incidence);
     //Retornamos la vista show.blade.php con los datos
-        return view('incidences.show')->with(compact('incidence'));
+        return view('incidence.show')->with(compact('incidence'));
     }
 
     /**
@@ -97,6 +101,7 @@ class IncidenceController extends Controller
      */
     public function edit($id)
     {
+        $incidence = Incidence::findOrFail($id);
         //Obtenemos los datos de las tablas relacionadas
         $users = User::all();
         $areas = Area::all();
@@ -129,10 +134,10 @@ class IncidenceController extends Controller
     ]);
 
     //Si la validación pasa, creamos la incidencia con los datos del request
-    $incidence = Incidence::create($request->all());
+    $incidence->update($request->all());
 
     //Retornamos una redirección a la vista show.blade.php con un mensaje de éxito
-    return redirect()->route('incidences.show', $incidence)->with('success', 'Incidencia creada correctamente.');
+    return redirect()->route('incidences.index', $incidence)->with('success', 'Incidencia actualizada correctamente.');
     }
 
     /**

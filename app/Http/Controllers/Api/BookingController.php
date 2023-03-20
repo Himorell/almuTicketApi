@@ -15,7 +15,7 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = Booking::all();
-        return response()->json($bookings, 200); 
+        return response()->json($bookings, 200);
     }
 
     public function create()
@@ -34,8 +34,13 @@ class BookingController extends Controller
             'areas' => $areas
         ]);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
+
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'area_id' => 'required|exists:areas,id',
@@ -53,21 +58,39 @@ class BookingController extends Controller
         $booking = Booking::create($request->all());
         $booking->save();
 
-        return response()->json([
+            return response()->json([
             'success' => true,
             'message' => 'Incidencia creada correctamente.',
             'data' => $booking
-        ], 200);
+        ],200);
+
     }
 
-    public function show(string $id){}
-    public function edit(string $id){}
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
 
     public function update(Request $request, string $id)
     {
         $booking = Booking::find($id);
 
-        $booking->update([
+        $booking ->update([
 
             'state_id' => $request->state_id,
             'comment' => $request->comment,
@@ -77,6 +100,10 @@ class BookingController extends Controller
 
         return response()->json($booking, 200);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(string $id)
     {
         $booking = Booking::find($id);
@@ -85,7 +112,20 @@ class BookingController extends Controller
             return response()->json(['error' => 'Booking not found'], 404);
         }
 
+        if ($booking->state_id != 1) {
+            return response()->json(['error' => 'No se puede eliminar la reserva porque ha sido vista'], 400);
+        }
+
         $booking->delete();
         return response()->json(['message' => 'La reserva fue eliminada correctamente']);
+    }
+
+    public function getBookings()
+    {
+        // Obtener todas las incidencias de la base de datos
+        $bookings = Booking::all();
+
+        // Devolver la colección de incidencias
+        return $bookings;
     }
 }

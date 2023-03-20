@@ -35,19 +35,19 @@ class Location extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function bookings()
     {
-        return $this->hasMany('App\Models\Booking', 'location_id', 'id');
+        return $this->belongsTo('App\Models\Booking', 'location_id', 'id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function incidences()
     {
-        return $this->hasMany('App\Models\Incidence', 'location_id', 'id');
+        return $this->belongsTo('App\Models\Incidence', 'location_id', 'id');
     }
 
 

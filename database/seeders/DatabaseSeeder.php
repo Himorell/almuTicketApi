@@ -7,8 +7,10 @@ use App\Models\Area;
 use App\Models\User;
 use App\Models\State;
 use App\Models\Booking;
+
 use App\Models\Category;
 use App\Models\Location;
+use App\Models\Incidence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -135,7 +137,30 @@ class DatabaseSeeder extends Seeder
             'name' => 'Recepcion Galaxia',
         ]);
 
-        // Booking::factory()->count(10)->create();
+
+        Incidence::factory()->count(10)->create();
+
+        Incidence::create([
+            'user_id' => 1,
+            'area_id' => 2,
+            'category_id' =>3,
+            'location_id' => 4,
+            'state_id' => 2,
+            'title' => 'sentence',
+            'description' => 'paragraph',
+        ]);
+
+        Incidence::create([
+            'user_id' => 1,
+            'area_id' => 2,
+            'category_id' =>3,
+            'location_id' => 4,
+            'state_id' => 2,
+            'title' => 'Prueba',
+            'description' => 'Probando seeder 2',
+        ]);
+
+        Booking::factory()->count(10)->create();
 
         Booking::create([
             'user_id' => 1,
@@ -150,5 +175,6 @@ class DatabaseSeeder extends Seeder
             'description' => 'paragraph',
             'comment' => 'comment',
         ]);
+
     }
 }

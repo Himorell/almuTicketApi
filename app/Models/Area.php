@@ -41,7 +41,7 @@ class Area extends Model
      */
     public function bookings()
     {
-        return $this->hasMany('App\Models\Booking', 'area_id', 'id');
+        return $this->belongsTo('App\Models\Booking', 'area_id', 'id');
     }
 
     /**
@@ -49,7 +49,7 @@ class Area extends Model
      */
     public function incidences()
     {
-        return $this->hasMany('App\Models\Incidence', 'area_id', 'id');
+        return $this->belongsTo('App\Models\Incidence', 'area_id', 'id');
     }
 
 
