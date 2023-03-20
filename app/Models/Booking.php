@@ -33,7 +33,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Booking extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> dev
     static $rules = [
 		'user_id' => 'required',
 		'area_id' => 'required',

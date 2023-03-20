@@ -12,7 +12,9 @@ class ApiCRUDCategoryTest extends TestCase
     /**
      * A basic feature test example.
      */
-    
+
+
+
     use RefreshDatabase;
 
     public function test_CheckIfCategoriesListedInJsonFile()
