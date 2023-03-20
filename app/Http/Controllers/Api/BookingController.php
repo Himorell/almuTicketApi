@@ -18,7 +18,7 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = Booking::all();
-        return response()->json($bookings);
+        return response()->json($bookings);//revisar si incluir status 200
     }
 
     /**
@@ -58,7 +58,7 @@ class BookingController extends Controller
             'numPeople' => 'required',
             'room' => 'required',
             'description' => 'required|string',
-            'comment' => 'required|string|max:255',
+            'comment' => 'string|max:255',
 
         ]);
 

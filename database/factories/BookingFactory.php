@@ -13,9 +13,9 @@ class BookingFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1, 10),
-            'area_id' => $this->faker->numberBetween(1, 5),
-            'location_id' => $this->faker->numberBetween(1, 3),
-            'state_id' => $this->faker->numberBetween(1, 3),
+            'area_id' => $this->faker->numberBetween(1, 15),
+            'location_id' => $this->faker->numberBetween(1, 6),
+            'state_id' => $this->faker->numberBetween(1, 6),
             'date' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
             'startTime' => $this->faker->time($format = 'H:i', $max = 'now'),
             'endTime' => $this->faker->time($format = 'H:i', $max = 'now'),

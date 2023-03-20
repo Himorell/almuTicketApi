@@ -22,6 +22,7 @@ class IncidenceController extends Controller
         //$incidences = Incidence::with(['users', 'areas', 'categories', 'locations', 'states'])->paginate();
         $incidences = Incidence::all();
         return response()->json($incidences);
+        
     }
 
     public function create()
@@ -41,6 +42,7 @@ class IncidenceController extends Controller
             'locations' => $locations,
             'areas' => $areas
         ]);
+
     }
     /**
      * Store a newly created resource in storage.
@@ -54,7 +56,8 @@ class IncidenceController extends Controller
             'location_id' => 'required|exists:locations,id',
             'state_id' => 'required|exists:states,id',
             'title' => 'required|string|max:255',
-            'description' => 'required|string'
+            'description' => 'required|string',
+            'comment' => 'string|max:255',
         ]);
 
             $incidences = Incidence::create($request->all());
@@ -65,6 +68,7 @@ class IncidenceController extends Controller
             'message' => 'Incidencia creada correctamente.',
             'data' => $incidences
         ],200);
+
         
     }
     /**
@@ -72,52 +76,45 @@ class IncidenceController extends Controller
      */
     public function show($id)
     {
-    $incidence = Incidence::find($id);
+    // $incidence = Incidence::find($id);
 
-    return response()->json($incidence);
+    // return response()->json($incidence);
     }
 
     public function edit($id)
     {
-        $incidences = Incidence::find($id);
-        $users = User::all();
-        $areas = Area::all();
-        $categories = Category::all();
-        $locations = Location::all();
-        $states = State::all();
+        // $incidences = Incidence::find($id);
+        // $users = User::all();
+        // $areas = Area::all();
+        // $categories = Category::all();
+        // $locations = Location::all();
+        // $states = State::all();
 
-            return response()->json([
-            'incidences' => $incidences,
-            'users' => $users,
-            'areas' => $areas,
-            'categories' => $categories,
-            'locations' => $locations,
-            'states' => $states
-        ]);
+        //     return response()->json([
+        //     'incidences' => $incidences,
+        //     'users' => $users,
+        //     'areas' => $areas,
+        //     'categories' => $categories,
+        //     'locations' => $locations,
+        //     'states' => $states
+        // ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Incidence $incidences, $id)
+    public function update(Request $request, string $id)
     {
-            $request->validate([
-            'state_id' => 'required|exists:states,id',
-            'comment' => 'incidence is updated'
+        $incidence = Incidence::find($id);
+
+        $incidence ->update([
+            'state_id' => $request->state_id,
+            'comment' => $request->comment,
         ]);
 
-            $incidence = Incidence::find($id);
-            $incidence->update([
-                'state_id' => $request->state_id,
-                'comment' => $request->comment,
-        ]);
         $incidence->save();
 
-            return response()->json([
-            'success' => true,
-            'message' => 'Incidencia actualizada correctamente.',
-            'data' => $incidences
-        ],200);
+        return response()->json($incidence, 200);
 
     }
     /**
