@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class incidenceController extends Controller
+class IncidenceController extends Controller
 {
     /**
      * Display a listing of the resource.
