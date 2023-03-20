@@ -63,3 +63,6 @@ Route::get('/bookings', [BookingController::class, 'index'])->name('bookingsApi'
 Route::delete('/deleteBooking/{id}', [BookingController::class, 'destroy'])->name('destroyBookingApi');
 Route::post('/createBooking', [BookingController::class, 'store'])->name('createBookingApi');
 Route::put('/updateBooking/{id}', [BookingController::class, 'update'])->name('updateBookingApi');
+
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {return $request->user();});
