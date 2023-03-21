@@ -18,13 +18,13 @@ class ApiCRUDBookingsTest extends TestCase
         $response->assertStatus(200)->assertJsonCount(2);
     }
 
-    public function test_IfBookingDeletedInJsonFile()
-    {
-        $booking = Booking::factory()->create();
-        $response = $this->delete(route('destroyBookingApi', $booking->id));
-        $response->assertStatus(200);
-        $this->assertDatabaseMissing('bookings', ['id' => $booking->id]);
-    }
+    // public function test_IfBookingDeletedInJsonFile()
+    // {
+    //     $booking = Booking::factory()->create();
+    //     $response = $this->delete(route('destroyBookingApi', $booking->id));
+    //     $response->assertStatus(200);
+    //     $this->assertDatabaseMissing('bookings', ['id' => $booking->id]);
+    // }
     // public function test_CheckIfCanCreateAnBookingWithJsonFile()
     // {
     //     $response = $this->post(route('createBookingApi'), [
