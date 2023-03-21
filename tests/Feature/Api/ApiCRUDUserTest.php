@@ -33,41 +33,46 @@ class ApiCRUDUserTest extends TestCase
     public function test_CheckIfCanCreateAnUserWithJsonFile()
     {
         $response = $this->post(route('createUserApi'), [
-            'name' => 'Coders',
+            'name' => 'Fem',
+            'surname' => 'Coders',
             'email' => 'coders@arrabalempleo.org',
             'password' => 'contraseña_segura'
         ]);
 
-        $data = ['name' => 'Coders'];
+        $data = ['name' => 'Fem'];
+        $data0 = ['surname' => 'Coders'];
         $data1 = ['email' => 'coders@arrabalempleo.org'];
         $data2 = ['password' =>'contraseña_segura'];
 
         $response = $this->get(route('usersApi'));
-        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data, $data1, $data2);
+        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data, $data0, $data1, $data2);
     }
 
     public function test_CheckIfCanUpdateAnUserWithJsonFile()
     {
         $response = $this->post(route('createUserApi'), [
-            'name' => 'Coders',
+            'name' => 'Fem',
+            'surname' => 'Coders',
             'email' => 'coders@arrabalempleo.org',
             'password' => 'contraseña_segura'
     ]);
 
-        $data = ['name' => 'Coders'];
+        $data = ['name' => 'Fem'];
+        $data0 = ['surname' => 'Coders'];
         $data1 = ['email' => 'coders@arrabalempleo.org'];
         $data2 = ['password' => 'contraseña_segura'];
 
         $response = $this->get(route('usersApi'));
-        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data, $data1, $data2);
+        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data, $data0, $data1, $data2);
 
-        $response = $this->put('/api/updateUser/1', ['name' => 'Coders', 'email' => 'coders@arrabalempleo.org', 'password' => 'contraseña_segura']);
+        $response = $this->put('/api/updateUser/1', ['name' => 'Fem', 'surname' => 'Coders', 'email' => 'coders@arrabalempleo.org', 'password' => 'contraseña_segura']);
 
-        $data = ['name' => 'Coders',];
+        $data = ['name' => 'Fem',];
+        $data0 = ['surname' => 'Coders',];
         $data1 = ['email' => 'coders@arrabalempleo.org'];
         $data2 = ['password' => 'contraseña_segura'];
 
         $response = $this->get(route('usersApi'));
-        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data, $data1, $data2);
+        $response->assertStatus(200)->assertJsonCount(1)->assertJsonFragment($data, $data0, $data1, $data2);
     }
 }
