@@ -34,7 +34,7 @@ Route::group([
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
-    Route::post('myUser', [AuthController::class, 'myUser'])->name('profile');
+    Route::post('myTickets', [AuthController::class, 'myTickets'])->name('myTickets');
     Route::post('register', [AuthController::class, 'register']);
     Route::post('home', [UserController::class, 'home'])->name('home');
 
