@@ -173,9 +173,7 @@ This web application will allow to generate tickets with requests, incidents and
 <h2>12. Next steps</h2>
 
 <ul>
-<li>........</li>
-<li>........</li>
-<li>........</li>
+<li>In development process</li>
 </ul>
 
 
