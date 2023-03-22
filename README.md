@@ -163,11 +163,11 @@ This web application will allow to generate tickets with requests, incidents and
 <h4>11.3 Warning & Testing</h4>
 <ol>
 <li><b>Important</b>: If we then need to run more commands in the IDE, we'll open a third terminal without closing the previous two.</li>
-<li><b>Test</b>: Run in the IDE <b>php artisan test</b> & <b>vendor/bin/phpunit</b> where it should return the following result:<b> Test: 21 passed (67 assertions)</b> and <b> Tests: 21, Assertions: 67, Warnings: 1</b></li>
+<li><b>Test</b>: Run in the IDE <b>php artisan test</b> & <b>vendor/bin/phpunit</b> where it should return the following result:<b> Test: 25 passed (80 assertions)</b> and <b> Tests: 25, Assertions: 80, Warnings: 1 </b></li>
 </ol>
 
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
-<img style="width:600px; height:350px; margin:12px" src="https://user-images.githubusercontent.com/116546588/226941442-5d4d409e-f00c-4049-8382-f12a75ceda82.png" alt="testBackend"/>
+<img style="width:680px; height:350px; margin:12px" src="https://user-images.githubusercontent.com/116546588/227026949-9ff97f98-ec4b-49d4-b334-91c7347dd223.png" alt="testBackend"/>
 </div>
 
 <h2>12. Next steps</h2>
