@@ -22,8 +22,9 @@ class IncidenceFactory extends Factory
             'category_id' => Category::factory(),
             'location_id' => Location::factory(),
             'state_id' => State::factory(),
-            'title' => $this->faker->sentence,
-            'description' => $this->faker->paragraph,
+            'title' => $this->faker->sentence(),
+            'description' => $this->faker->paragraph(),
+            'comment'=> $this->faker->sentence,
         ];
     }
 }
