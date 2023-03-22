@@ -36,6 +36,7 @@ class Booking extends Model
     static $rules = [
 		'user_id' => 'required',
 		'area_id' => 'required',
+        //'room_id' => 'required',
 		'location_id' => 'required',
 		'state_id' => 'required',
 		'date' => 'required',
@@ -53,7 +54,7 @@ class Booking extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id','area_id','location_id','state_id','date','startTime','endTime','numPeople','room','description','comment'];
+    protected $fillable = ['user_id','area_id','room_id', 'location_id','state_id','date','startTime','endTime','numPeople','description','comment'];
 
 
     /**
@@ -62,6 +63,11 @@ class Booking extends Model
     public function area()
     {
         return $this->hasOne('App\Models\Area', 'id', 'area_id');
+    }
+
+    public function room()
+    {
+        return $this->hasOne('App\Models\Room', 'id', 'room_id');
     }
 
     /**
