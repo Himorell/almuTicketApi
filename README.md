@@ -66,29 +66,23 @@ This web application will allow to generate tickets with requests, incidents and
 <h2>4. Project Demo</h2>
 
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
-<img style="width:220px; height:150px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225119393-5b21b696-647a-47fc-9df0-d18d1d969a8e.gif" alt="Preliminary project demo"/>
+<img style="width:684px; height:375px; margin:12px" src="https://user-images.githubusercontent.com/116546588/226945351-7479cabe-012c-4ccf-9081-af1bf9a4d78b.png" alt="Preliminary project demo"/>
 </div>
 
-<h2>5. Initial Sketch</h2>
-
-<div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
-<img style="width:220px; height:150px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225119393-5b21b696-647a-47fc-9df0-d18d1d969a8e.gif" alt="Preliminary project demo"/>
-</div>
-
-<h2>6. Atomic Design</h2>
+<h2>5. Atomic Design</h2>
 
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
 <img style="width:500px; height:350px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225412449-994b2a48-2f61-4937-86de-f192c5cfbb18.png" alt="Atomic Design"/>
 </div>
 
-<h2>7. Final Design</h2>
-<h3>7.1 Mobile View</h3>
+<h2>6. Final Design</h2>
+<h3>6.1 Mobile View</h3>
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225414018-1e6cbf5b-dc98-4c2d-ab3d-bf0d3b055900.png" alt="Mobile View 1"/>
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225414427-9e1ff808-1a49-4a9e-ade1-7a5bc6145ec1.png" alt="Mobile View 2"/>
 </div>
 
-<h3>7.2 Computer views (Common administrator and user)</h3>
+<h3>6.2 Computer views (Common administrator and user)</h3>
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225418149-a84e987b-58a5-419b-9393-70a2f369ec79.png" alt="Register"/>
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225418340-08799744-9b5a-4699-8d88-bd26b3a2a738.png" alt="Ingress"/>
@@ -96,14 +90,14 @@ This web application will allow to generate tickets with requests, incidents and
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225418659-c80e4f9a-321a-49ff-a647-819c353c8857.png" alt="Tickets List"/>
 </div>
 
-<h3>7.3 Exclusive administrator view</h3>
+<h3>6.3 Exclusive administrator view</h3>
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225421792-6eb20698-2b50-49af-9703-8a4658fa8769.png" alt="Tickets List"/>
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225422498-98d13650-2e27-4517-a83f-88200879543e.png" alt="Gestion Reservs"/>
 <img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225422811-45da6340-9318-4924-8425-3bc60a0b43c7.png" alt="Gestion Incidences"/>
 </div>
 
-<h2>8. Stacks and technologies</h2>
+<h2>7. Stacks and technologies</h2>
 
  <p align="left">
  <img src= "https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white"></img>
@@ -120,14 +114,14 @@ This web application will allow to generate tickets with requests, incidents and
  </p>
  
   
-<h2>9. Other Tools</h2>
+<h2>8. Other Tools</h2>
 
  <img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white"></img>
  <img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white"></img>
  <img src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white"></img>
 
 
-<h2>10. Methodology</h2>
+<h2>9. Methodology</h2>
 <ul>
 <li>Agile (SCRUM)</li> 
 <li>Mob programming</li> 
@@ -136,7 +130,7 @@ This web application will allow to generate tickets with requests, incidents and
 <li>TDD</li> 
 </ul>
 
-<h2>11. Core skills</h2>
+<h2>10. Core skills</h2>
 <ul>
 <li>MVC Design pattern.</li>
 <li>Git version control system.</li>
@@ -144,15 +138,15 @@ This web application will allow to generate tickets with requests, incidents and
 <li>Communication and self-evaluation.</li>
 </ul>
 
-<h2>12. How to install</h2>
-<h4>12.1 Required:</h4>
+<h2>11. How to install</h2>
+<h4>11.1 Required:</h4>
 <li>NPM Installed.</li>
 <li>PHP (Minimum, version 8.1).</li>
 <li>Composer & Laravel Installed and updated to latest version.</li>
 <li>XAMPP/LAMPP Installed.</li>
 <li>MySQL.</li><br>
 
-<h4>12.2 To install our project</h4>
+<h4>11.2 To install our project</h4>
 <li>Open IDE</li>
 <li>Copy in the terminal: git clone https://github.com/Himorell/almuTicketApi</li>
 <li>Type in the IDE terminal: <b>npm install</b> and press intro.</li>
@@ -166,17 +160,17 @@ This web application will allow to generate tickets with requests, incidents and
 <li>Type in the IDE terminal: <b>php artisan migrate</b> and press intro</li>
 <li>Type in the IDE terminal: <b>php artisan serve</b> and press intro.</li><br>
 
-<h4>12.3 Warning & Testing</h4>
+<h4>11.3 Warning & Testing</h4>
 <ol>
 <li><b>Important</b>: If we then need to run more commands in the IDE, we'll open a third terminal without closing the previous two.</li>
-<li><b>Test</b>: Run in the IDE <b>php artisan test</b> & <b>vendor/bin/phpunit</b> where it should return the following result:<b> xxx passed</b> and <b> OK (xxx test, xxx assertions)</b></li>
+<li><b>Test</b>: Run in the IDE <b>php artisan test</b> & <b>vendor/bin/phpunit</b> where it should return the following result:<b> Test: 21 passed (67 assertions)</b> and <b> Tests: 21, Assertions: 67, Warnings: 1</b></li>
 </ol>
 
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
-<img style="width:220px; height:150px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225119393-5b21b696-647a-47fc-9df0-d18d1d969a8e.gif" alt="Preliminary project demo"/>
+<img style="width:600px; height:350px; margin:12px" src="https://user-images.githubusercontent.com/116546588/226941442-5d4d409e-f00c-4049-8382-f12a75ceda82.png" alt="testBackend"/>
 </div>
 
-<h2>13. Next steps</h2>
+<h2>12. Next steps</h2>
 
 <ul>
 <li>........</li>
