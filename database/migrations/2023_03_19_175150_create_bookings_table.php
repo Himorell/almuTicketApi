@@ -30,7 +30,6 @@ return new class extends Migration
             $table->time('startTime');
             $table->time('endTime');
             $table->integer('numPeople');
-            //$table->string('room');
             $table->string('description');
             $table->string('comment')->nullable();
 
