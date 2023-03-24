@@ -86,7 +86,6 @@ Route::put('/updateCategory/{id}', [CategoryController::class, 'update'])->name(
 
 Route::get('/users', [UserController::class, 'index'])->name('usersApi');
 Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('destroyUserApi');
-Route::post('/createUser', [UserController::class, 'store'])->name('createUserApi');
 Route::put('/updateUser/{id}', [UserController::class, 'update'])->name('updateUserApi');
 
 
