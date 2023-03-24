@@ -25,24 +25,7 @@ class IncidenceController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        $incidence = new Incidence();
-        $users = User::pluck('name', 'id');
-        $categories = Category::pluck('name', 'id');
-        $states = State::pluck('name', 'id');
-        $locations = Location::pluck('name', 'id');
-        $areas = Area::pluck('name', 'id');
-
-        return response()->json([
-            'incidence' => $incidence,
-            'users' => $users,
-            'categories' => $categories,
-            'states' => $states,
-            'locations' => $locations,
-            'areas' => $areas
-        ]);
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -63,6 +46,16 @@ class IncidenceController extends Controller
         ]);
 
         $incidence = Incidence::create($request->all());
+
+        $incidence = Incidence::create([
+            'user_id' => $request->user_id,
+            'area_id' => $request->area_id,
+            'location_id' => $request->location_id,
+            'category_id' => $request->category_id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'comment' => $request->comment,
+        ]);
         $incidence->save();
 
             return response()->json([
@@ -94,6 +87,7 @@ class IncidenceController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
         $incidence = Incidence::find($id);
 
         $incidence ->update([
@@ -105,6 +99,7 @@ class IncidenceController extends Controller
         $incidence->save();
 
         return response()->json($incidence, 200);
+
     }
 
     /**
