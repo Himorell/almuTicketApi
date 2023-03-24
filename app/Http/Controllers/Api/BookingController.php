@@ -12,18 +12,12 @@ use App\Http\Controllers\Controller;
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $bookings = Booking::all();
-        return response()->json($bookings);//revisar si incluir status 200
+        return response()->json($bookings, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $booking = new Booking();
@@ -59,7 +53,6 @@ class BookingController extends Controller
             'room' => 'required',
             'description' => 'required|string',
             'comment' => 'string|max:255',
-
         ]);
 
         $booking = Booking::create($request->all());
@@ -92,13 +85,13 @@ class BookingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    
+
     public function update(Request $request, string $id)
     {
         $booking = Booking::find($id);
 
         $booking ->update([
-            
+
             'state_id' => $request->state_id,
             'comment' => $request->comment,
         ]);

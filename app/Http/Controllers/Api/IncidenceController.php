@@ -11,8 +11,7 @@ use App\Models\Incidence;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
-class incidenceController extends Controller
+class IncidenceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -60,9 +59,9 @@ class incidenceController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'comment' => 'string|max:255',
-            
+
         ]);
-        
+
         $incidence = Incidence::create($request->all());
         $incidence->save();
 
@@ -73,7 +72,7 @@ class incidenceController extends Controller
         ],200);
 
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -98,7 +97,7 @@ class incidenceController extends Controller
         $incidence = Incidence::find($id);
 
         $incidence ->update([
-            
+
             'state_id' => $request->state_id,
             'comment' => $request->comment,
         ]);

@@ -1,22 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
-use App\Models\Area;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
-
-class AreaController extends Controller
+class RoomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $areas = Area::get();
-        return response()->json($areas,200);
+        $rooms = Room::get();
+        return response()->json($rooms, 200);
     }
 
     /**
@@ -32,11 +27,11 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        $area = Area::create([
+        $room = Room::create([
             'name' => $request->name,
         ]);
-        $area->save();
-        return response()->json($area, 200);
+        $room->save();
+        return response()->json($room, 200);
     }
 
     /**
@@ -60,15 +55,15 @@ class AreaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $area = Area::find($id);
+        $room = Room::find($id);
 
-        $area ->update([
+        $room->update([
             'name' => $request->name,
         ]);
 
-        $area->save();
+        $room->save();
 
-        return response()->json($area, 200);
+        return response()->json($room, 200);
     }
 
     /**
@@ -76,14 +71,13 @@ class AreaController extends Controller
      */
     public function destroy($id)
     {
-        $area = Area::find($id);
+        $room = Room::find($id);
 
-        if (!$area) {
-            return response()->json(['error' => 'Area not found'], 404);
+        if (!$room) {
+            return response()->json(['error' => 'Room not found'], 404);
         }
 
-        $area->delete();
-        return response()->json(['message' => 'Area deleted successfully']);
+        $room->delete();
+        return response()->json(['message' => 'Room deleted successfully']);
     }
-
 }

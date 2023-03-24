@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Area;
+use App\Models\Room;
 use App\Models\User;
 use App\Models\State;
+
 use App\Models\Booking;
 use App\Models\Category;
 use App\Models\Location;
@@ -138,6 +140,50 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        Room::create([
+            'name' => 'IMO/Salon de Actos',
+        ]);
+        Room::create([
+            'name' => 'IMO/Biblioteca',
+        ]);
+        Room::create([
+            'name' => 'IMO/Direccion Cifal',
+        ]);
+        Room::create([
+            'name' => 'IMO/Sala Puerta del Rio',
+        ]);
+        Room::create([
+            'name' => 'IMO/Entrada Sala de Encuentros',
+        ]);
+
+        Room::create([
+            'name' => 'EL CARMEN/Aula de Formacion',
+        ]);
+        Room::create([
+            'name' =>'EL CARMEN/Espacio Central Abierto',
+        ]);
+        Room::create([
+            'name' =>'EL CARMEN/Espacio Coworking',
+        ]);
+
+        Room::create([
+            'name' =>'DOS ACERAS/Aula 3',
+        ]);
+        Room::create([
+            'name' =>'DOS ACERAS/Sala Comun 1ªPlanta',
+        ]);
+        Room::create([
+            'name' =>'DOS ACERAS/Salon de Actos',
+        ]);
+        Room::create([
+            'name' =>'DOS ACERAS/BDT',
+        ]);
+        Room::create([
+            'name' =>'EDIF.GALAXIA/Sala Galaxia',
+        ]);
+        Room::create([
+            'name' =>'EDIF.GALAXIA/Aula Enrique Scholtz',
+        ]);
         Incidence::factory()->count(10)->create();
 
         Incidence::create([
@@ -165,13 +211,14 @@ class DatabaseSeeder extends Seeder
         Booking::create([
             'user_id' => 1,
             'area_id' => 1,
+            'room_id' => 1,
             'location_id' => 1,
             'state_id' => 1,
             'date' => '2023-01-01',
             'startTime' => '00:01',
             'endTime' => '00:01',
             'numPeople' => 3,
-            'room' => 'name',
+            // 'room' => 'name',
             'description' => 'paragraph',
             'comment' => 'comment',
         ]);

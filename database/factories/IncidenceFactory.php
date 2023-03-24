@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+
 use App\Models\Area;
 use App\Models\Category;
 use App\Models\Incidence;

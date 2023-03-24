@@ -37,18 +37,17 @@ class IncidenceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //
     public function create()
     {
-        
         $incidences = new Incidence();
         $users = User::pluck('name', 'id');
         $categories = Category::pluck('name', 'id');
         $states = State::pluck('name', 'id');
         $locations = Location::pluck('name', 'id');
         $areas = Area::pluck('name', 'id');
-        
-        return view('incidence.create', compact('incidences','users','categories','areas','locations','states'));
-        
+
+        return view('incidence.create', compact('incidences', 'users', 'categories', 'areas', 'locations', 'states'));
     }
 
     /**
@@ -68,13 +67,15 @@ class IncidenceController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string'
         ]);
-    
+
         //Si la validación pasa, creamos la incidencia con los datos del request
         $incidence = Incidence::create($request->all());
-    
+
         //Retornamos una redirección a la vista show.blade.php con un mensaje de éxito
         return redirect()->route('incidences.index', $incidence)->with('success', 'Incidencia creada correctamente.');
 
+        //Retornamos una redirección a la vista show.blade.php con un mensaje de éxito
+        return redirect()->route('incidences.index', $incidence)->with('success', 'Incidencia creada correctamente.');
     }
 
     /**
@@ -109,7 +110,7 @@ class IncidenceController extends Controller
         $states = State::all();
 
         //Retornamos la vista edit.blade.php con los datos
-        return view('incidences.edit')->with(compact('incidence', 'users', 'areas', 'categories', 'locations', 'states'));
+        return view('incidences.edit')->with(compact('incidences', 'users', 'areas', 'categories', 'locations', 'states'));
     }
 
     /**
