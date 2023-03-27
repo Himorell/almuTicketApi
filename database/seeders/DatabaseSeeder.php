@@ -173,6 +173,10 @@ class DatabaseSeeder extends Seeder
         Room::create([
             'name' =>'EDIF.GALAXIA/Sala Galaxia',
         ]);
+        Room::create([
+            'name' => 'OTROS',
+        ]);
+
         Incidence::factory()->count(10)->create();
 
         Incidence::create([
