@@ -59,8 +59,7 @@ Route::get('/bookings', [BookingController::class, 'index'])->name('bookingsApi'
 Route::get('/booking/{id}', [BookingController::class, 'show'])->name('bookingShowApi')->middleware('auth');
 Route::delete('/deleteBooking/{id}', [BookingController::class, 'destroy'])->name('destroyBookingApi')->middleware('auth');
 Route::post('/createBooking', [BookingController::class, 'store'])->name('createBookingApi')->middleware('auth');
-Route::put('/updateBooking/{id}', [BookingController::class, 'update'])->name('updateBookingApi')->middleware('auth');
-
+Route::put('/updateBooking/{id}', [BookingController::class, 'update'])->name('updateBookingApi')->middleware('isAdmin','auth');
 
 Route::get('/states', [StateController::class, 'index'])->name('statesApi');
 Route::delete('/deleteState/{id}',[StateController::class,'destroy'])->name('destroyStateApi');
@@ -93,4 +92,5 @@ Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('des
 Route::put('/updateUser/{id}', [UserController::class, 'update'])->name('updateUserApi');
 =======
 Route::put('/updateUser/{id}', [UserController::class, 'update'])->name('updateUserApi');
->>>>>>> ba1d761 (move middleware branch in branch dev)
+
+
