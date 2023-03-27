@@ -21,12 +21,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        User::factory(5)->create();
 
         User::factory()->create([
             'name' => 'Fem',
             'surname' => 'Coders',
             'email' => 'coders@arrabalempleo.org',
+            'isAdmin' => True,
+        ]);
+
+        User::factory()->create([
+            'name' => 'Himo',
+            'surname' => 'Jara',
+            'email' => 'himo@arrabalempleo.org',
+            'isAdmin' => false,
         ]);
 
         Category::create([
@@ -139,7 +147,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Recepcion Galaxia',
         ]);
 
-
         Room::create([
             'name' => 'IMO/Salon de Actos',
         ]);
@@ -184,7 +191,7 @@ class DatabaseSeeder extends Seeder
         Room::create([
             'name' =>'EDIF.GALAXIA/Aula Enrique Scholtz',
         ]);
-        Incidence::factory()->count(10)->create();
+        Incidence::factory()->count(5)->create();
 
         Incidence::create([
             'user_id' => 1,
@@ -206,7 +213,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'Probando seeder 2',
         ]);
 
-        Booking::factory()->count(10)->create();
+        Booking::factory()->count(5)->create();
 
         Booking::create([
             'user_id' => 1,
@@ -218,7 +225,6 @@ class DatabaseSeeder extends Seeder
             'startTime' => '00:01',
             'endTime' => '00:01',
             'numPeople' => 3,
-            // 'room' => 'name',
             'description' => 'paragraph',
             'comment' => 'comment',
         ]);
