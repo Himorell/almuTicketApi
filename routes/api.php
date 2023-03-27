@@ -64,7 +64,7 @@ Route::put('/updateBooking/{id}', [BookingController::class, 'update'])->name('u
 Route::get('/states', [StateController::class, 'index'])->name('statesApi');
 Route::delete('/deleteState/{id}',[StateController::class,'destroy'])->name('destroyStateApi');
 Route::post('/createState',[StateController::class,'store'])->name('createStateApi');
-Route::put('/updateState/{id}', [StateController::class, 'update'])->name('updateStateApi')->middleware('isAdmin','auth');
+Route::put('/updateState/{id}', [StateController::class, 'update'])->name('updateStateApi');
 
 Route::get('/locations', [LocationController::class, 'index'])->name('locationsApi');
 Route::post('/createLocation', [LocationController::class,'store'])->name('createLocationApi');

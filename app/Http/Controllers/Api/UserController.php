@@ -8,7 +8,13 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth:api']);
+    }
+    
     public function index()
+    
     {
         $users = User::get();
         return response()->json($users, 200);

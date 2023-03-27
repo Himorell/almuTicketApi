@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Booking;
 use App\Models\Area;
 use App\Models\User;
 use App\Models\State;
+use App\Models\Booking;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\Contracts\Providers\Auth;
 
 class BookingController extends Controller
 {
@@ -39,12 +40,6 @@ class BookingController extends Controller
 
         $user = auth()->user();
 
-        if ($user->isAdmin && request('user_id')) {
-            $user_id = request('user_id');
-        } else {
-            $user_id = $user->id;
-        }
-
         $validatedData = $request->validate([
             'user_id' => 'sometimes|required|exists:users,id',
             'area_id' => 'required|exists:areas,id',
@@ -58,8 +53,8 @@ class BookingController extends Controller
             'comment' => 'nullable',
         ]);
         
-        $booking = Booking::create([
-            'user_id' => $user->isAdmin && $request->has('user_id') ? $request->user_id : $user->id,
+            $booking = Booking::create([
+            'user_id' => $user->id,
             'area_id' => $validatedData['area_id'],
             'room_id' => $validatedData['room_id'],
             'location_id' => $validatedData['location_id'],
@@ -72,7 +67,7 @@ class BookingController extends Controller
             
         ]);
         
-        $booking->save();
+        //$booking->save();
     
         return response()->json([
             'message' => 'Reserva creada con éxito',
