@@ -76,8 +76,6 @@ class BookingController extends Controller
             'description' => $validatedData['description'],
 
         ]);
-        
-        $booking->save();
     
         return response()->json([
             'message' => 'Reserva creada con éxito',
@@ -90,25 +88,15 @@ class BookingController extends Controller
      */
     public function show(Request $request, $id)
     {
-
-        if (!$request->user()) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
-
-        if ($request->user()->isAdmin) {
-
-            $booking = Booking::find($id);
-        } else {
-
-            $booking = Booking::where('user_id', $request->user()->id)->where('id', $id)->first();
-        }
-
-        if (!$booking) {
-            return response()->json(['message' => 'Booking not found'], 404);
-        }
-
-        return response()->json($booking, 200);
+        $booking = Booking::findOrFail($id);
+        
+        return response()->json([
+            'data' => $booking,
+            'message' => 'Booking showed successfully'
+        ], 200);
     }
+
+    
 
     /**
      * Update the specified resource in storage.
@@ -116,13 +104,6 @@ class BookingController extends Controller
 
     public function update(Request $request, $id)
     {
-        
-        $user = auth()->user();
-        if (!$user || !$user->isAdmin) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
-        
-        if ($user->isAdmin) {
         $booking = Booking::findOrFail($id);
 
         $validatedData = $request->validate([
@@ -136,29 +117,26 @@ class BookingController extends Controller
             'comment' => $validatedData['comment'],
         ]);
 
+        // Actualizar la reserva
+        //$booking->update($validatedData);
+
         return response()->json([
             'message' => 'Reserva de sala actualizada correctamente.',
             'data' => $booking
         ], 200);
-        }
     }
 
+    
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, string $id)
+    public function destroy(string $id)
     {
-        $user = $request->user();
-
-        if (!$user) {
-            return response()->json(['error' => 'No estás autenticado'], 401);
-        }
-
         $booking = Booking::find($id);
 
         if (!$booking) {
-            return response()->json(['error' => 'Booking not found'], 404);
+            return response()->json(['error' => 'No se pudo encontrar la reserva'], 404);
         }
 
         if ($booking->state_id != 1) {
