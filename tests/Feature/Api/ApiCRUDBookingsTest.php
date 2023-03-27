@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ApiCRUDBookingsTest extends TestCase
 {
-    use RefreshDatabase;
+    //use RefreshDatabase;
 
     // public function test_OnlyAdminCanAccessBookingFullListedInJsonFile()
     // {
