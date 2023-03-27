@@ -44,7 +44,6 @@ Route::group([
     Route::post('myTickets', [AuthController::class, 'myTickets'])->name('myTickets');
     Route::post('register', [AuthController::class, 'register']);
     Route::post('home', [UserController::class, 'home'])->name('home');
-    Route::get('/bookings', [BookingController::class, 'index'])->name('bookingsApi');
 
 });
 
@@ -56,10 +55,12 @@ Route::delete('/deleteIncidence/{id}', [IncidenceController::class, 'destroy'])-
 Route::post('/createIncidence', [IncidenceController::class, 'store'])->name('createIncidenceApi')->middleware('auth');
 Route::put('/updateIncidence/{id}', [IncidenceController::class, 'update'])->name('updateIncidenceApi')->middleware('isAdmin','auth');
 
+Route::get('/bookings', [BookingController::class, 'index'])->name('bookingsApi')->middleware('auth');
 Route::get('/booking/{id}', [BookingController::class, 'show'])->name('bookingShowApi')->middleware('auth');
 Route::delete('/deleteBooking/{id}', [BookingController::class, 'destroy'])->name('destroyBookingApi')->middleware('auth');
 Route::post('/createBooking', [BookingController::class, 'store'])->name('createBookingApi')->middleware('auth');
 Route::put('/updateBooking/{id}', [BookingController::class, 'update'])->name('updateBookingApi')->middleware('isAdmin','auth');
+
 
 Route::get('/states', [StateController::class, 'index'])->name('statesApi');
 Route::delete('/deleteState/{id}',[StateController::class,'destroy'])->name('destroyStateApi');
@@ -89,5 +90,3 @@ Route::put('/updateCategory/{id}', [CategoryController::class, 'update'])->name(
 Route::get('/users', [UserController::class, 'index'])->name('usersApi');
 Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('destroyUserApi');
 Route::put('/updateUser/{id}', [UserController::class, 'update'])->name('updateUserApi');
-
-

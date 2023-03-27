@@ -14,23 +14,25 @@ use Tymon\JWTAuth\Contracts\Providers\Auth;
 class BookingController extends Controller
 {
 
-    public function index()
-{
-        $user = auth()->user();
-        
-        if ($user->isAdmin) {
+    public function index(Request $request)
+    {
+        // Verificar si el usuario está autenticado
+        if (!$request->user()) {
+            return response()->json(['message' => 'No esta autorizado para visualizar esta ruta'], 401);
+        }
+
+        // Verificar si el usuario es un administrador
+        if ($request->user()->isAdmin) {
+            // Recuperar todas las reservas
             $bookings = Booking::all();
-        } 
-        if (!$user->isAdmin) {
-            $bookings = $user->bookings;
-        } 
-        
+        } else {
+            // Recuperar solo las reservas del usuario autenticado
+            $bookings = Booking::where('user_id', $request->user()->id)->get();
+        }
+
+        // Devolver la respuesta correspondiente en formato JSON
         return response()->json($bookings, 200);
-
-        
-}
-
-
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -84,15 +86,23 @@ class BookingController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        // Recuperar el registro solicitado
-        $booking = Booking::findOrFail($id);
+        // Verificar si el usuario es un administrador
+        if ($request->user()->isAdmin) {
+            // Recuperar cualquier reserva
+            $booking = Booking::find($id);
+        } else {
+            // Recuperar solo las reservas del usuario autenticado
+            $booking = Booking::where('user_id', $request->user()->id)->where('id', $id)->first();
+        }
+
+        // Verificar si la reserva existe
+        if (!$booking) {
+            return response()->json(['message' => 'Booking not found'], 404);
+        }
 
         // Devolver la respuesta correspondiente en formato JSON
-        return response()->json(['booking' => $booking], 200);
+        return response()->json($booking, 200);
     }
-
-
-    
 
     /**
      * Update the specified resource in storage.
@@ -134,8 +144,6 @@ class BookingController extends Controller
 
     }
 
-    
-
     /**
      * Remove the specified resource from storage.
      */
@@ -150,6 +158,10 @@ class BookingController extends Controller
 
         if (!$booking) {
             return response()->json(['error' => 'No se pudo encontrar la reserva'], 404);
+        }
+
+        if ($booking->user_id != $request->user()->id) {
+            return response()->json(['message' => 'No tiene autorización de eliminar esta reserva'], 403);
         }
 
         if ($booking->state_id != 1) {
