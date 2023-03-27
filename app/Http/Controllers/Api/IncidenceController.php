@@ -19,87 +19,75 @@ class IncidenceController extends Controller
     public function index()
     {
         $incidences = Incidence::all();
-        return response()->json($incidences);//revisar si incluir status 200
+        return response()->json($incidences, 200);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-
-        $request->validate([
+        $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
             'area_id' => 'required|exists:areas,id',
-            'location_id' => 'required|exists:locations,id',
-            'state_id' => 'required|exists:states,id',
             'category_id' => 'required|exists:categories,id',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'comment' => 'string|max:255',
-
+            'location_id' => 'required|exists:locations,id',
+            'title' => 'required|max:255',
+            'description' => 'required|max:255',
         ]);
-
-        $incidence = Incidence::create($request->all());
 
         $incidence = Incidence::create([
-            'user_id' => $request->user_id,
-            'area_id' => $request->area_id,
-            'location_id' => $request->location_id,
-            'category_id' => $request->category_id,
-            'title' => $request->title,
-            'description' => $request->description,
-            'comment' => $request->comment,
+            'user_id' => $validatedData['user_id'],
+            'area_id' => $validatedData['area_id'],
+            'category_id' => $validatedData['category_id'],
+            'location_id' => $validatedData['location_id'],
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description'],
         ]);
-        $incidence->save();
 
-            return response()->json([
-            'success' => true,
-            'message' => 'Incidencia creada correctamente.',
-            'data' => $incidence
-        ],200);
-
+        return response()->json([
+            'message' => 'Incidencia creada exitosamente',
+            'data' => $incidence,
+        ], 201);
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $incidence = Incidence::findOrFail($id);
+        
+        return response()->json([
+            'data' => $incidence,
+            'message' => 'Incidence showed successfully'
+        ], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
+        $incidence = Incidence::findOrFail($id);
 
-        $incidence = Incidence::find($id);
+        $request->validate([
+            'state_id' => 'required|exists:states,id',
+            'comment' => 'nullable|string',
+        ]);
 
-        $incidence ->update([
-
+        $incidence->update([
             'state_id' => $request->state_id,
             'comment' => $request->comment,
         ]);
 
-        $incidence->save();
-
-        return response()->json($incidence, 200);
-
+        return response()->json([
+            'message' => 'Reserva de sala actualizada correctamente.',
+            'data' => $incidence
+        ], 200);
     }
 
     /**

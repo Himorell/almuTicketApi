@@ -56,17 +56,11 @@ class BookingController extends Controller
         
         return response()->json([
             'data' => $booking,
-            'message' => 'Booking retrieved successfully'
+            'message' => 'Booking showed successfully'
         ], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
