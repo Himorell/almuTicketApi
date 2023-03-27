@@ -52,5 +52,83 @@ class ApiCRUDAuthTest extends TestCase
         $this->assertGuest();
     }
 
+    public function testUserCanRegisterSuccessfully()
+    {
+        $userData = [
+            'name' => 'Lola',
+            'surname' => 'Garcia',
+            'email' => 'lolagarcia@arrabalempleo.org',
+            'password' => 'password',
+            'password_confirmation' => 'password'
+        ];
 
+        $response = $this->json('POST', '/api/auth/register', $userData);
+
+        $response->assertStatus(201)
+            ->assertJsonStructure([
+                'message',
+                'user' => [
+                    'name',
+                    'surname',
+                    'email',
+                    'created_at',
+                    'updated_at',
+                    'id'
+                ]
+            ]);
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'Lola',
+            'surname' => 'Garcia',
+            'email' => 'lolagarcia@arrabalempleo.org'
+        ]);
+    }
+
+    public function testUserRegistrationFailsWithMissingInformation()
+    {
+        $userData = [
+            'surname' => 'Garcia',
+            'email' => 'lolagarcia@arrabalempleo.org',
+            'password' => 'password',
+            'password_confirmation' => 'password'
+        ];
+
+        $response = $this->json('POST', '/api/auth/register', $userData);
+
+        $response->assertStatus(400);
+    }
+
+    public function testUserRegistrationFailsWithExistingEmail()
+    {
+        $existingUser = User::factory()->create([
+            'email' => 'lola@arrabalempleo.org'
+        ]);
+
+        $userData = [
+            'name' => 'Lola',
+            'surname' => 'Navarro',
+            'email' => 'lola@arrabalempleo.org',
+            'password' => 'password',
+            'password_confirmation' => 'password'
+        ];
+
+        $response = $this->json('POST', '/api/auth/register', $userData);
+
+        $response->assertStatus(400);
+    }
+
+    public function testUserRegistrationFailsWithShortPassword()
+    {
+        $userData = [
+            'name' => 'Lola',
+            'surname' => 'Garcia',
+            'email' => 'lolagarcia@arrabalempleo.org',
+            'password' => 'pass',
+            'password_confirmation' => 'pass'
+        ];
+
+        $response = $this->json('POST', '/api/auth/register', $userData);
+
+        $response->assertStatus(400);
+    }
 }
