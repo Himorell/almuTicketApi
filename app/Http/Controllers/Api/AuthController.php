@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 //use App\Http\Controllers\Api\AuthController;
@@ -16,6 +18,8 @@ class AuthController extends Controller
      *
      * @return void
      */
+    use HasFactory, RefreshDatabase;
+
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['login','register']]);

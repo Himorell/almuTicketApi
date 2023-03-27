@@ -12,11 +12,23 @@ use App\Http\Controllers\Controller;
 
 class BookingController extends Controller
 {
+
     public function index()
-    {
-        $bookings = Booking::all();
+{
+        $user = auth()->user();
+        
+        if ($user->isAdmin) {
+            $bookings = Booking::all();
+        } 
+        if (!$user->isAdmin) {
+            $bookings = $user->bookings;
+        } 
+        
         return response()->json($bookings, 200);
-    }
+
+        
+}
+
 
 
     /**
@@ -25,8 +37,16 @@ class BookingController extends Controller
     public function store(Request $request)
     {
 
+        $user = auth()->user();
+
+        if ($user->isAdmin && request('user_id')) {
+            $user_id = request('user_id');
+        } else {
+            $user_id = $user->id;
+        }
+
         $validatedData = $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'user_id' => 'sometimes|required|exists:users,id',
             'area_id' => 'required|exists:areas,id',
             'room_id' => 'required|exists:rooms,id',
             'location_id' => 'required|exists:locations,id',
@@ -37,8 +57,22 @@ class BookingController extends Controller
             'description' => 'required',
             'comment' => 'nullable',
         ]);
-    
-        $booking = Booking::create($validatedData);
+        
+        $booking = Booking::create([
+            'user_id' => $user->isAdmin && $request->has('user_id') ? $request->user_id : $user->id,
+            'area_id' => $validatedData['area_id'],
+            'room_id' => $validatedData['room_id'],
+            'location_id' => $validatedData['location_id'],
+            'state_id' => 1,
+            'date' => $validatedData['date'],
+            'startTime' => $validatedData['startTime'],
+            'endTime' => $validatedData['endTime'],
+            'numPeople' => $validatedData['numPeople'],
+            'description' => $validatedData['description'],
+            
+        ]);
+        
+        $booking->save();
     
         return response()->json([
             'message' => 'Reserva creada con éxito',

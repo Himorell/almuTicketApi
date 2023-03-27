@@ -27,6 +27,10 @@ use App\Http\Controllers\Api\IncidenceController;
 |
 */
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
 Route::group([
 
     'middleware' => 'api',
@@ -40,31 +44,27 @@ Route::group([
     Route::post('myTickets', [AuthController::class, 'myTickets'])->name('myTickets');
     Route::post('register', [AuthController::class, 'register']);
     Route::post('home', [UserController::class, 'home'])->name('home');
+    Route::get('/bookings', [BookingController::class, 'index'])->name('bookingsApi');
 
 });
 
+Route::get('/tickets', [TicketController::class, 'index'])->name('ticketsApi')->middleware('isAdmin','auth');
 
+Route::get('/incidences', [IncidenceController::class, 'index'])->name('incidencesApi')->middleware('auth');
+Route::get('/incidence/{id}', [IncidenceController::class, 'show'])->name('incidenceShowApi')->middleware('auth');
+Route::delete('/deleteIncidence/{id}', [IncidenceController::class, 'destroy'])->name('destroyIncidenceApi')->middleware('auth');
+Route::post('/createIncidence', [IncidenceController::class, 'store'])->name('createIncidenceApi')->middleware('auth');
+Route::put('/updateIncidence/{id}', [IncidenceController::class, 'update'])->name('updateIncidenceApi')->middleware('isAdmin','auth');
 
-Route::get('/tickets', [TicketController::class, 'index'])->name('ticketsApi');
-
-Route::get('/incidences', [IncidenceController::class, 'index'])->name('incidencesApi');
-Route::get('/incidence/{id}', [IncidenceController::class, 'show'])->name('incidenceShowApi');
-Route::delete('/deleteIncidence/{id}', [IncidenceController::class, 'destroy'])->name('destroyIncidenceApi');
-Route::post('/createIncidence', [IncidenceController::class, 'store'])->name('createIncidenceApi');
-Route::put('/updateIncidence/{id}', [IncidenceController::class, 'update'])->name('updateIncidenceApi');
-
-Route::apiResource('incidences', IncidenceController::class);
-
-Route::get('/bookings', [BookingController::class, 'index'])->name('bookingsApi');
-Route::get('/booking/{id}', [BookingController::class, 'show'])->name('bookingShowApi');
-Route::delete('/deleteBooking/{id}', [BookingController::class, 'destroy'])->name('destroyBookingApi');
-Route::post('/createBooking', [BookingController::class, 'store'])->name('createBookingApi');
-Route::put('/updateBooking/{id}', [BookingController::class, 'update'])->name('updateBookingApi');
+Route::get('/booking/{id}', [BookingController::class, 'show'])->name('bookingShowApi')->middleware('auth');
+Route::delete('/deleteBooking/{id}', [BookingController::class, 'destroy'])->name('destroyBookingApi')->middleware('auth');
+Route::post('/createBooking', [BookingController::class, 'store'])->name('createBookingApi')->middleware('auth');
+Route::put('/updateBooking/{id}', [BookingController::class, 'update'])->name('updateBookingApi')->middleware('isAdmin','auth');
 
 Route::get('/states', [StateController::class, 'index'])->name('statesApi');
 Route::delete('/deleteState/{id}',[StateController::class,'destroy'])->name('destroyStateApi');
 Route::post('/createState',[StateController::class,'store'])->name('createStateApi');
-Route::put('/updateState/{id}', [StateController::class, 'update'])->name('updateStateApi');
+Route::put('/updateState/{id}', [StateController::class, 'update'])->name('updateStateApi')->middleware('isAdmin','auth');
 
 Route::get('/locations', [LocationController::class, 'index'])->name('locationsApi');
 Route::post('/createLocation', [LocationController::class,'store'])->name('createLocationApi');
