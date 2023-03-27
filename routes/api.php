@@ -48,6 +48,7 @@ Route::group([
 Route::get('/tickets', [TicketController::class, 'index'])->name('ticketsApi');
 
 Route::get('/incidences', [IncidenceController::class, 'index'])->name('incidencesApi');
+Route::get('/incidence/{id}', [IncidenceController::class, 'show'])->name('incidenceShowApi');
 Route::delete('/deleteIncidence/{id}', [IncidenceController::class, 'destroy'])->name('destroyIncidenceApi');
 Route::post('/createIncidence', [IncidenceController::class, 'store'])->name('createIncidenceApi');
 Route::put('/updateIncidence/{id}', [IncidenceController::class, 'update'])->name('updateIncidenceApi');
@@ -55,6 +56,7 @@ Route::put('/updateIncidence/{id}', [IncidenceController::class, 'update'])->nam
 Route::apiResource('incidences', IncidenceController::class);
 
 Route::get('/bookings', [BookingController::class, 'index'])->name('bookingsApi');
+Route::get('/booking/{id}', [BookingController::class, 'show'])->name('bookingShowApi');
 Route::delete('/deleteBooking/{id}', [BookingController::class, 'destroy'])->name('destroyBookingApi');
 Route::post('/createBooking', [BookingController::class, 'store'])->name('createBookingApi');
 Route::put('/updateBooking/{id}', [BookingController::class, 'update'])->name('updateBookingApi');

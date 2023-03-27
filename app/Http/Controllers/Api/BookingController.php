@@ -18,22 +18,6 @@ class BookingController extends Controller
         return response()->json($bookings, 200);
     }
 
-    public function create()
-    {
-        $booking = new Booking();
-        $users = User::pluck('name', 'id');
-        $states = State::pluck('name', 'id');
-        $locations = Location::pluck('name', 'id');
-        $areas = Area::pluck('name', 'id');
-
-        return response()->json([
-            'booking' => $booking,
-            'users' => $users,
-            'states' => $states,
-            'locations' => $locations,
-            'areas' => $areas
-        ]);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,37 +25,39 @@ class BookingController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
+        $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
             'area_id' => 'required|exists:areas,id',
+            'room_id' => 'required|exists:rooms,id',
             'location_id' => 'required|exists:locations,id',
-            'state_id' => 'required|exists:states,id',
-            'date' => 'required',
+            'date' => 'required|date|after_or_equal:today',
             'startTime' => 'required',
-            'endTime' => 'required',
-            'numPeople' => 'required',
-            'room' => 'required',
-            'description' => 'required|string',
-            'comment' => 'string|max:255',
+            'endTime' => 'required|after:startTime',
+            'numPeople' => 'required|integer|min:1',
+            'description' => 'required',
+            'comment' => 'nullable',
         ]);
-
-        $booking = Booking::create($request->all());
-        $booking->save();
-
-            return response()->json([
-            'success' => true,
-            'message' => 'Incidencia creada correctamente.',
+    
+        $booking = Booking::create($validatedData);
+    
+        return response()->json([
+            'message' => 'Reserva creada con éxito',
             'data' => $booking
-        ],200);
+        ], 201);
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $booking = Booking::findOrFail($id);
+        
+        return response()->json([
+            'data' => $booking,
+            'message' => 'Booking retrieved successfully'
+        ], 200);
     }
 
     /**
@@ -88,18 +74,25 @@ class BookingController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $booking = Booking::find($id);
+        $booking = Booking::findOrFail($id);
 
-        $booking ->update([
+        $request->validate([
+            'state_id' => 'required|exists:states,id',
+            'comment' => 'nullable|string',
+        ]);
 
+        $booking->update([
             'state_id' => $request->state_id,
             'comment' => $request->comment,
         ]);
 
-        $booking->save();
-
-        return response()->json($booking, 200);
+        return response()->json([
+            'message' => 'Reserva de sala actualizada correctamente.',
+            'data' => $booking
+        ], 200);
     }
+
+    
 
     /**
      * Remove the specified resource from storage.
