@@ -16,13 +16,7 @@ class IncidenceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-    //     $incidences = Incidence::all();
-    //     return response()->json($incidences, 200);
-    // }
-
-
+    
     public function index(Request $request)
     {
             if (!$request->user()) {
