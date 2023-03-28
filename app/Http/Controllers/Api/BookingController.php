@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Area;
+use App\Models\Room;
 use App\Models\User;
 use App\Models\State;
 use App\Models\Booking;
@@ -20,21 +21,28 @@ class BookingController extends Controller
     }
 
     public function index(Request $request)
-    {
-        if (!$request->user()) {
-            return response()->json(['message' => 'No esta autorizado para visualizar esta ruta'], 401);
-        }
-
-        if ($request->user()->isAdmin) {
-
-            $bookings = Booking::all();
-        } else {
-
-            $bookings = Booking::where('user_id', $request->user()->id)->get();
-        }
-
-        return response()->json($bookings, 200);
+{
+    if (!$request->user()) {
+        return response()->json(['message' => 'No está autorizado para visualizar esta ruta'], 401);
     }
+
+    if ($request->user()->isAdmin) {
+        $bookings = Booking::all();
+    } else {
+        $bookings = Booking::where('user_id', $request->user()->id)->get();
+    }
+
+    // Obtener los modelos de Area y Location correspondientes a cada Booking
+    foreach ($bookings as $booking) {
+        $booking->user_name = User::find($booking->user_id)->name;
+        $booking->area_name = Area::find($booking->area_id)->name;
+        $booking->location_name = Location::find($booking->location_id)->name;
+        $booking->room_name = Room::find($booking->room_id)->name;
+        $booking->state_name = State::find($booking->state_id)->name;
+    }
+
+    return response()->json($bookings, 200);
+}
 
     /**
      * Store a newly created resource in storage.
