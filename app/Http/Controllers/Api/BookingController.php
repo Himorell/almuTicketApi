@@ -147,10 +147,10 @@ class BookingController extends Controller
             return response()->json(['error' => 'No estás autenticado'], 401);
         }
 
-        $booking = $user->bookings()->find($id);
+        $booking = Booking::find($id);
 
         if (!$booking) {
-            return response()->json(['error' => 'No se pudo encontrar la reserva'], 404);
+            return response()->json(['error' => 'Booking not found'], 404);
         }
 
         if ($booking->state_id != 1) {
