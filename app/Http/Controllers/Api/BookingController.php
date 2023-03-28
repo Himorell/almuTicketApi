@@ -20,21 +20,18 @@ class BookingController extends Controller
 
     public function index(Request $request)
     {
-        // Verificar si el usuario está autenticado
         if (!$request->user()) {
             return response()->json(['message' => 'No esta autorizado para visualizar esta ruta'], 401);
         }
 
-        // Verificar si el usuario es un administrador
         if ($request->user()->isAdmin) {
-            // Recuperar todas las reservas
+
             $bookings = Booking::all();
         } else {
-            // Recuperar solo las reservas del usuario autenticado
+
             $bookings = Booking::where('user_id', $request->user()->id)->get();
         }
 
-        // Devolver la respuesta correspondiente en formato JSON
         return response()->json($bookings, 200);
     }
 
@@ -58,9 +55,9 @@ class BookingController extends Controller
             'description' => 'required',
             'comment' => 'nullable',
         ]);
-        
-        $booking = Booking::create([
-            'user_id' => $user->isAdmin && $request->has('user_id') ? $request->user_id : $user->id,
+
+            $booking = Booking::create([
+            'user_id' => $user->id,
             'area_id' => $validatedData['area_id'],
             'room_id' => $validatedData['room_id'],
             'location_id' => $validatedData['location_id'],
@@ -72,7 +69,7 @@ class BookingController extends Controller
             'description' => $validatedData['description'],
 
         ]);
-    
+
         return response()->json([
             'message' => 'Reserva creada con éxito',
             'data' => $booking
@@ -84,16 +81,27 @@ class BookingController extends Controller
      */
     public function show(Request $request, $id)
     {
-        // Verificar si el usuario está autenticado
+
         if (!$request->user()) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        // Recuperar el registro solicitado
-        $booking = Booking::findOrFail($id);
+        // Verificar si el usuario es un administrador
+        if ($request->user()->isAdmin) {
+            // Recuperar cualquier reserva
+            $booking = Booking::find($id);
+        } else {
+            // Recuperar solo las reservas del usuario autenticado
+            $booking = Booking::where('user_id', $request->user()->id)->where('id', $id)->first();
+        }
+
+        // Verificar si la reserva existe
+        if (!$booking) {
+            return response()->json(['message' => 'Booking not found'], 404);
+        }
 
         // Devolver la respuesta correspondiente en formato JSON
-        return response()->json(['booking' => $booking], 200);
+        return response()->json($booking, 200);
     }
 
 
@@ -105,6 +113,18 @@ class BookingController extends Controller
 
     public function update(Request $request, $id)
     {
+
+        // Verificar si el usuario está autenticado
+        if (!$request->user()) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        // Verificar si el usuario tiene permisos para actualizar la reserva
+        if (!$request->user()->isAdmin) {
+            return response()->json(['message' => 'Forbidden'], 403);
+        }
+
+        // Recuperar la reserva a actualizar
         $booking = Booking::findOrFail($id);
 
         $validatedData = $request->validate([
@@ -118,7 +138,6 @@ class BookingController extends Controller
             'comment' => $validatedData['comment'],
         ]);
 
-        // Actualizar la reserva
         //$booking->update($validatedData);
 
         return response()->json([
@@ -132,6 +151,11 @@ class BookingController extends Controller
      */
     public function destroy(string $id)
     {
+        // Verificar si el usuario está autenticado
+        if (!$request->user()) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+        
         $booking = Booking::find($id);
 
         if (!$booking) {

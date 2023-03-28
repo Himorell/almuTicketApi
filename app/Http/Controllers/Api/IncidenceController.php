@@ -14,35 +14,24 @@ use App\Http\Controllers\Controller;
 
 class IncidenceController extends Controller
 {
-        public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
+    /**
+     * Display a listing of the resource.
+     */
+    // public function index()
+    // {
+    //     $incidences = Incidence::all();
+    //     return response()->json($incidences, 200);
+    // }
+
 
     public function index(Request $request)
     {
-            if (!$request->user()) {
-            return response()->json(['message' => 'No esta autorizado para visualizar esta ruta'], 401);
-        }
-
-            if ($request->user()->isAdmin) {
-
-            $incidences = Incidence::all();
-        } else {
-
-            $incidences = Incidence::where('user_id', $request->user()->id)->get();
-        }
-
-        foreach ($incidences as $incidence) {
-            $incidence->user_name = User::find($incidence->user_id)->name;
-            $incidence->area_name = Area::find($incidence->area_id)->name;
-            $incidence->location_name = Location::find($incidence->location_id)->name;
-            $incidence->category_name = Room::find($incidence->category_id)->name;
-            $incidence->state_name = State::find($incidence->state_id)->name;
-        }
-
+        $incidences = Incidence::all();
         return response()->json($incidences, 200);
     }
+    // /**
+    //  * Store a newly created resource in storage.
+    //  */
 
     public function store(Request $request)
     {
@@ -72,8 +61,10 @@ class IncidenceController extends Controller
         ], 201);
     }
 
-
-    public function show(Request $request, $id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
         if (!$request->user()) {
             return response()->json(['message' => 'Unauthorized'], 401);
@@ -94,7 +85,12 @@ class IncidenceController extends Controller
         return response()->json($incidence, 200);
     }
 
-    public function update(Request $request, $id)
+    
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
 
         $user = auth()->user();
