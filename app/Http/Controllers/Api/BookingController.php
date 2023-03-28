@@ -156,7 +156,7 @@ class BookingController extends Controller
         $booking = Booking::find($id);
 
         if (!$booking) {
-            return response()->json(['error' => 'No se pudo encontrar la reserva'], 404);
+            return response()->json(['error' => 'Booking not found'], 404);
         }
 
         if ($booking->state_id != 1) {
