@@ -8,6 +8,8 @@ Create an internal APP for Asociación Arrabal in order to centralize all the re
 
 This web application will allow to generate tickets with requests, incidents and room reservations to the people who are part of Arrabal from their cell phones or desktops and to Almudena to manage them all from only one place: AlmuTicket app.
 
+This readme corresponds to the <b>backend development</b> of the application, which is <b>complemented</b> by the frontend development located in the repository https://github.com/CarmenGP/almuticket-front
+
 <h2>2. User Stories</h2>
 <h4>2.1 Administrator</h4>
 <ul>
@@ -66,35 +68,48 @@ This web application will allow to generate tickets with requests, incidents and
 <h2>4. Project Demo</h2>
 
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
-<img style="width:684px; height:375px; margin:12px" src="https://user-images.githubusercontent.com/116546588/226945351-7479cabe-012c-4ccf-9081-af1bf9a4d78b.png" alt="Preliminary project demo"/>
+<img style="width:780px; height:390px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228353492-7fdf086b-d898-474f-ab59-91c81ac1dac4.jpg" alt="testBackend"/>
 </div>
 
 <h2>5. Atomic Design</h2>
-
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
-<img style="width:500px; height:350px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225412449-994b2a48-2f61-4937-86de-f192c5cfbb18.png" alt="Atomic Design"/>
+<img style="width:190px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228356422-cccd6d65-11a4-4855-8c99-c184891e0f69.png" alt="Atomic Design 1"/>
+<img style="width:190px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228356895-5a13cc06-9da3-427d-aa17-9536b869179a.png" alt="Atomic Design 2"/>
+<img style="width:190px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228357051-fb898380-6f65-4b61-b501-1192b371ddd0.png" alt="Arrabal Logo White"/>    
+<img style="width:190px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228357192-250de3dc-8c24-4165-98e8-31948d9d44ea.png" alt="Arrabal Logo Orange"/>      
 </div>
 
 <h2>6. Final Design</h2>
 <h3>6.1 Mobile View</h3>
+<h4>User Mobile view</h4>
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
-<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225414018-1e6cbf5b-dc98-4c2d-ab3d-bf0d3b055900.png" alt="Mobile View 1"/>
-<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225414427-9e1ff808-1a49-4a9e-ade1-7a5bc6145ec1.png" alt="Mobile View 2"/>
+<img style="width:190px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228358183-6599352a-bfd3-441c-b4c7-8482f1ec3a70.png" alt="User Mobile View 1"/>
+<img style="width:190px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228358310-4e0cbda1-6960-4680-af30-d5009998892f.png" alt="User Mobile View 2"/>
+<img style="width:190px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228358521-cb5f6fb6-d8d8-4556-87d0-a48180619de4.png" alt="User Mobile View 3"/>    
+<img style="width:190px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228358676-71a8d3ce-bdfb-4302-be99-06874fe06fe3.png" alt="User Mobile View 4"/>  
+</div>
+
+<h4>Mobile View of Tickets</h4>
+<div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
+<img style="width:190px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228362093-5d98ad3e-5842-4f59-b2b4-a8c1915b2e7e.png" alt="Booking View Ticket"/>
+<img style="width:190px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228362180-0408e224-1f3f-4981-a601-bb6dfa52631f.png" alt="Incident View Ticket"/>
 </div>
 
 <h3>6.2 Computer views (Common administrator and user)</h3>
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
-<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225418149-a84e987b-58a5-419b-9393-70a2f369ec79.png" alt="Register"/>
-<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225418340-08799744-9b5a-4699-8d88-bd26b3a2a738.png" alt="Ingress"/>
-<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225423555-5c64ae07-e252-49ab-a471-a4a2ca5f8d51.png" alt="Generate Ticket"/>
-<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225418659-c80e4f9a-321a-49ff-a647-819c353c8857.png" alt="Tickets List"/>
+<img style="width:390px; height:270px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228364641-dd4bdf17-6eeb-4f89-a744-eeb7d3de9f72.png" alt="Register"/>
+<img style="width:390px; height:270px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228364781-edbfdefc-7c7a-475c-ba4b-90ce17d1efc4.png" alt="Ingress"/>
+<img style="width:390px; height:270px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228364990-c1c9c2ad-d6c1-43dd-bd2c-29e49a3e8511.png" alt="Generate Ticket"/>
+<img style="width:390px; height:270px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228365179-ffca49aa-929e-4d98-9eb5-3eaddbc3945b.png" alt="Tickets List"/>
+<img style="width:390px; height:270px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228365439-0ca07a3b-676c-4a11-8415-72975678a3b2.png" alt="Create Booking"/>
+<img style="width:390px; height:270px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228365615-6fd8a083-f241-4fc1-ab6a-252f9278ee22.png" alt="Create Incidence"/>
 </div>
 
 <h3>6.3 Exclusive administrator view</h3>
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
-<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225421792-6eb20698-2b50-49af-9703-8a4658fa8769.png" alt="Tickets List"/>
-<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225422498-98d13650-2e27-4517-a83f-88200879543e.png" alt="Gestion Reservs"/>
-<img style="width:500px; height:320px; margin:12px" src="https://user-images.githubusercontent.com/116546588/225422811-45da6340-9318-4924-8425-3bc60a0b43c7.png" alt="Gestion Incidences"/>
+<img style="width:390px; height:270px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228367171-48602556-f44d-490b-a72a-80f908c68cd3.png" alt="Tickets List"/>
+<img style="width:390px; height:270px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228367392-d976a442-400f-4e37-9d52-5bef7c3b4e90.png" alt="Gestion Reservs"/>
+<img style="width:390px; height:270px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228367588-35930bea-40df-4f10-acd2-1979d64257ae.png" alt="Gestion Incidences"/>
 </div>
 
 <h2>7. Stacks and technologies</h2>
@@ -139,7 +154,7 @@ This web application will allow to generate tickets with requests, incidents and
 </ul>
 
 <h2>11. How to install</h2>
-<h4>11.1 Required:</h4>
+<h3>11.1 Required:</h3>
 <li>NPM Installed.</li>
 <li>JWT Installed.</li>
 <li>PHP (Minimum, version 8.1).</li>
@@ -147,15 +162,15 @@ This web application will allow to generate tickets with requests, incidents and
 <li>XAMPP/LAMPP Installed.</li>
 <li>MySQL.</li><br>
 
-<h4>11.2 To install our project</h4>
+<h3>11.2 To install our project</h3>
 <li>Open IDE</li>
 <li>Copy in the terminal: git clone https://github.com/Himorell/almuTicketApi</li>
 <li>Type in the IDE terminal: <b>npm install</b> and press intro.</li>
 <li>In the IDE run <b>git clone</b> command, an paste the HTTPS.</li>
 <li>Write in the IDE terminal the command: <b>composer update</b>.</li>
 <li>Write in the IDE terminal the command: <b>composer require tymon/jwt-auth</b>.</li>
-<li>Type in the IDE terminal: <b>php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"</li>
-<li>Type in the IDE terminal: <b>php artisan jwt:secret</li>
+<li>Type in the IDE terminal: <b>php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"</b></li>
+<li>Type in the IDE terminal: <b>php artisan jwt:secret</b></li>
 <li>An <b>.env</b> file (in the form of a little wheel) will be downloaded. Go into it and rename the line <b>DB_DATABASE</b>. Change the name generated by default and write <b>almuticket</b></li>
 <li>Open XAMPP or LAMPP.</li>
 <li>Login to <b>phpMyAdmin</b> and create a new database named <b>almuticket</b></li>
@@ -164,14 +179,40 @@ This web application will allow to generate tickets with requests, incidents and
 <li>Type in the IDE terminal: <b>php artisan migrate</b> and press intro</li>
 <li>Type in the IDE terminal: <b>php artisan serve</b> and press intro.</li><br>
 
-<h4>11.3 Warning & Testing</h4>
+<h3>11.3 Warning & Testing</h3>
 <ol>
 <li><b>Important</b>: If we then need to run more commands in the IDE, we'll open a third terminal without closing the previous two.</li>
 <li><b>Test</b>: Run in the IDE <b>php artisan test</b> & <b>vendor/bin/phpunit</b> where it should return the following result:<b> Test: 25 passed (80 assertions)</b> and <b> Tests: 25, Assertions: 80, Warnings: 1 </b></li>
 </ol>
 
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
-<img style="width:680px; height:350px; margin:12px" src="https://user-images.githubusercontent.com/116546588/227026949-9ff97f98-ec4b-49d4-b334-91c7347dd223.png" alt="testBackend"/>
+<img style="width:790px; height:370px; margin:12px" src="https://user-images.githubusercontent.com/116546588/227026949-9ff97f98-ec4b-49d4-b334-91c7347dd223.png" alt="testBackend"/>
+</div>
+
+<h3>11.4 API verification with Postman</h3>
+Through the Postman application we have carried out our API verification. Through this application we have tested the "HTTP Request" to validate the responses received. Below we share the verification carried out:
+
+<h4>11.4.1 Register, Login and Logout POST method</h4>
+<div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
+<img style="width:390px; height:220px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228292779-9270906b-208a-412e-b51d-a1762228780a.png" alt="postRegister"/>
+<img style="width:390px; height:220px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228292384-7e66a2de-0645-4121-b352-2831dab03821.png" alt="postLogin"/>
+<img style="width:390px; height:220px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228293060-ebae7a91-ef33-4b28-9701-a7eca235059c.png" alt="postLogout"/>
+</div>
+
+<h4>11.4.2 Booking CRUD</h4>
+<div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
+<img style="width:390px; height:220px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228297756-a3aaf895-d44b-425d-a986-bfda9ec7f2cf.png" alt="createBooking"/>
+<video src="https://user-images.githubusercontent.com/116546588/228301146-c73a3a35-b03d-4135-b825-3dee416bd0c5.mp4" controls></video>
+<img style="width:390px; height:220px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228330070-ed8a4a2b-78cb-455d-9453-87b781d711c1.png" alt="readBookingShowID"/>
+<img style="width:390px; height:220px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228324044-ecc803bb-3091-45d5-a656-b798d5e36235.png" alt="updateBooking"/>
+<img style="width:390px; height:220px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228297159-b7afa14d-a1a5-40fc-81d6-8428f6575d0c.png" alt="deleteBooking"/>
+</div>
+
+<h4>11.4.3 Incidence CRUD</h4>
+<div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
+<video src="https://user-images.githubusercontent.com/116546588/228331939-b4d5f985-9d80-43d8-b87c-88b32384ed75.mp4" controls></video>
+<video src="https://user-images.githubusercontent.com/116546588/228332139-9df1e7d5-a91f-48ed-b7cb-0cf69a325db2.mp4" controls></video>
+<img style="width:390px; height:220px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228337557-69c886e3-3774-44b4-8af7-c1dc8c26e91b.png" alt="readIncidenceShowId"/>
 </div>
 
 <h2>12. Next steps</h2>
@@ -179,7 +220,3 @@ This web application will allow to generate tickets with requests, incidents and
 <ul>
 <li>In development process</li>
 </ul>
-
-
-
-
