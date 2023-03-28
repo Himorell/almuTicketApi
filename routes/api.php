@@ -59,7 +59,7 @@ Route::get('/bookings', [BookingController::class, 'index'])->name('bookingsApi'
 Route::get('/booking/{id}', [BookingController::class, 'show'])->name('bookingShowApi')->middleware('auth');
 Route::delete('/deleteBooking/{id}', [BookingController::class, 'destroy'])->name('destroyBookingApi')->middleware('auth');
 Route::post('/createBooking', [BookingController::class, 'store'])->name('createBookingApi')->middleware('auth');
-Route::put('/updateBooking/{id}', [BookingController::class, 'update'])->name('updateBookingApi')->middleware('isAdmin','auth');
+Route::put('/updateBooking/{id}', [BookingController::class, 'update'])->name('updateBookingApi')->middleware('auth');
 
 
 Route::get('/states', [StateController::class, 'index'])->name('statesApi');
