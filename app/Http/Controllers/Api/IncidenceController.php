@@ -13,10 +13,11 @@ use App\Http\Controllers\Controller;
 
 class IncidenceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    
+        public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     public function index(Request $request)
     {
             if (!$request->user()) {
@@ -33,9 +34,6 @@ class IncidenceController extends Controller
 
         return response()->json($incidences, 200);
     }
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
 
     public function store(Request $request)
     {
@@ -65,9 +63,7 @@ class IncidenceController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Request $request, $id)
     {
         if (!$request->user()) {
@@ -89,38 +85,47 @@ class IncidenceController extends Controller
         return response()->json($incidence, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        $incidence = Incidence::findOrFail($id);
 
-        $request->validate([
-            'state_id' => 'required|exists:states,id',
-            'comment' => 'nullable|string',
-        ]);
+        $user = auth()->user();
+        if (!$user || !$user->isAdmin) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
 
-        $incidence->update([
-            'state_id' => $request->state_id,
-            'comment' => $request->comment,
-        ]);
+        if ($user->isAdmin) {
+            $incidence = Incidence::findOrFail($id);
 
-        return response()->json([
-            'message' => 'Reserva de sala actualizada correctamente.',
-            'data' => $incidence
-        ], 200);
+            $validatedData = $request->validate([
+                'state_id' => 'required|exists:states,id',
+                'comment' => 'nullable|string',
+            ]);
+
+
+            $incidence->update([
+                'state_id' => $validatedData['state_id'],
+                'comment' => $validatedData['comment'],
+            ]);
+
+            return response()->json([
+                'message' => 'Incidencia de sala actualizada correctamente.',
+                'data' => $incidence
+            ], 200);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
+        $user = $request->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'No estás autenticado'], 401);
+        }
+
         $incidence = Incidence::find($id);
 
         if (!$incidence) {
-            return response()->json(['error' => 'incidence not found'], 404);
+            return response()->json(['error' => 'Incidence not found'], 404);
         }
 
         if ($incidence->state_id != 1) {
@@ -129,7 +134,7 @@ class IncidenceController extends Controller
 
         $incidence->delete();
         return response()->json(['message' => 'La incidencia fue eliminada correctamente']);
-        }
+    }
 
     public function getIncidences()
     {
