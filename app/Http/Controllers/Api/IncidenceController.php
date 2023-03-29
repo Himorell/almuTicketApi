@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Area;
+use App\Models\Room;
 use App\Models\User;
 use App\Models\State;
 use App\Models\Category;
@@ -30,6 +31,14 @@ class IncidenceController extends Controller
         } else {
 
             $incidences = Incidence::where('user_id', $request->user()->id)->get();
+        }
+
+        foreach ($incidences as $incidence) {
+            $incidence->user_name = User::find($incidence->user_id)->name;
+            $incidence->area_name = Area::find($incidence->area_id)->name;
+            $incidence->location_name = Location::find($incidence->location_id)->name;
+            $incidence->room_name = Room::find($incidence->room_id)->name;
+            $incidence->state_name = State::find($incidence->state_id)->name;
         }
 
         return response()->json($incidences, 200);
