@@ -34,6 +34,14 @@ class IncidenceController extends Controller
             $incidences = Incidence::where('user_id', $request->user()->id)->get();
         }
 
+        foreach ($incidences as $incidence) {
+            $incidence->user_name = User::find($incidence->user_id)->name;
+            $incidence->area_name = Area::find($incidence->area_id)->name;
+            $incidence->location_name = Location::find($incidence->location_id)->name;
+            $incidence->category_name = Room::find($incidence->category_id)->name;
+            $incidence->state_name = State::find($incidence->state_id)->name;
+        }
+
         return response()->json($incidences, 200);
     }
 
