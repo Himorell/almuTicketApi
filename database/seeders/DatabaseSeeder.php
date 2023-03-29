@@ -68,10 +68,6 @@ class DatabaseSeeder extends Seeder
             'isAdmin' => false,
         ]);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ba1d761 (move middleware branch in branch dev)
         //Categories seeds
         Category::create([
             'name' => 'Apoyo a Programas',
@@ -187,23 +183,19 @@ class DatabaseSeeder extends Seeder
 
         //Rooms seeds
         Room::create([
-            'name' => 'IMO/Salon de Actos',
+            'name' => 'IMO/Salón de Actos',
         ]);
         Room::create([
-            'name' => 'IMO/Biblioteca',
+            'name' => 'IMO/Espacio de Innovación',
         ]);
         Room::create([
-            'name' => 'IMO/Direccion Cifal',
+            'name' => 'IMO/Sala de Formación',
         ]);
         Room::create([
-            'name' => 'IMO/Sala Puerta del Rio',
+            'name' => 'IMO/Sala de Encuentros',
         ]);
         Room::create([
-            'name' => 'IMO/Entrada Sala de Encuentros',
-        ]);
-
-        Room::create([
-            'name' => 'EL CARMEN/Aula de Formacion',
+            'name' => 'EL CARMEN/Aula de Formación',
         ]);
         Room::create([
             'name' =>'EL CARMEN/Espacio Central Abierto',
@@ -216,19 +208,16 @@ class DatabaseSeeder extends Seeder
             'name' =>'DOS ACERAS/Aula 3',
         ]);
         Room::create([
-            'name' =>'DOS ACERAS/Sala Comun 1ªPlanta',
+            'name' =>'DOS ACERAS/Sala Común 1ªPlanta',
         ]);
         Room::create([
             'name' =>'DOS ACERAS/Salon de Actos',
         ]);
         Room::create([
-            'name' =>'DOS ACERAS/BDT',
-        ]);
-        Room::create([
             'name' =>'EDIF.GALAXIA/Sala Galaxia',
         ]);
         Room::create([
-            'name' =>'EDIF.GALAXIA/Aula Enrique Scholtz',
+            'name' => 'OTROS',
         ]);
 
 
