@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Location
  *
@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Location extends Model
 {
-    
+    use HasFactory;
     static $rules = [
 		'name' => 'required',
     ];
@@ -35,20 +35,20 @@ class Location extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function bookings()
     {
-        return $this->hasMany('App\Models\Booking', 'location_id', 'id');
+        return $this->belongsTo('App\Models\Booking', 'location_id', 'id');
     }
-    
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function incidences()
     {
-        return $this->hasMany('App\Models\Incidence', 'location_id', 'id');
+        return $this->belongsTo('App\Models\Incidence', 'location_id', 'id');
     }
-    
+
 
 }

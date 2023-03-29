@@ -4,10 +4,14 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Area;
+use App\Models\Room;
 use App\Models\User;
 use App\Models\State;
+
+use App\Models\Booking;
 use App\Models\Category;
 use App\Models\Location;
+use App\Models\Incidence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,13 +21,54 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
+        //Users seeds
+        
         User::factory()->create([
-            'name' => 'Coders',
+            'name' => 'Fem',
+            'surname' => 'Coders',
             'email' => 'coders@arrabalempleo.org',
+            'isAdmin' => True,
         ]);
 
+        User::factory()->create([
+            'name' => 'Almudena',
+            'surname' => 'Andreu',
+            'email' => 'a.andreu@arrabalempleo.org',
+            'isAdmin' => True,
+        ]);
+
+        User::factory()->create([
+            'name' => 'Anabel',
+            'surname' => 'Vilar',
+            'email' => 'avilar@arrabalempleo.org',
+            'isAdmin' => false,
+        ]);
+        User::factory()->create([
+            'name' => 'Sandra',
+            'surname' => 'Leon',
+            'email' => 'sleon@arrabalempleo.org',
+            'isAdmin' => false,
+        ]);
+        User::factory()->create([
+            'name' => 'Carmen',
+            'surname' => 'Cruces',
+            'email' => 'ccruces@arrabalempleo.org',
+            'isAdmin' => false,
+        ]);
+        User::factory()->create([
+            'name' => 'Carmen',
+            'surname' => 'Gallardo',
+            'email' => 'cgallardo@arrabalempleo.org',
+            'isAdmin' => false,
+        ]);
+        User::factory()->create([
+            'name' => 'Raquel',
+            'surname' => 'Palomo',
+            'email' => 'rpalomo@arrabalempleo.org',
+            'isAdmin' => false,
+        ]);
+
+        //Categories seeds
         Category::create([
             'name' => 'Apoyo a Programas',
         ]);
@@ -40,7 +85,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Materiales',
         ]);
 
-
+        //States seeds
         State::create([
             'name' => 'Emitido',
         ]);
@@ -63,6 +108,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Finalizado',
         ]);
 
+        //Locations seeds
         Location::create([
             'name' => 'Dos Aceras',
         ]);
@@ -82,6 +128,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Remoto',
         ]);
 
+        //Areas seeds
         Area::create([
             'name' => 'Personas y Talento',
         ]);
@@ -133,5 +180,96 @@ class DatabaseSeeder extends Seeder
         Area::create([
             'name' => 'Recepcion Galaxia',
         ]);
+
+        //Rooms seeds
+        Room::create([
+            'name' => 'IMO/Salón de Actos',
+        ]);
+        Room::create([
+            'name' => 'IMO/Espacio de Innovación',
+        ]);
+        Room::create([
+            'name' => 'IMO/Sala de Formación',
+        ]);
+        Room::create([
+            'name' => 'IMO/Sala de Encuentros',
+        ]);
+        Room::create([
+            'name' => 'EL CARMEN/Aula de Formación',
+        ]);
+        Room::create([
+            'name' =>'EL CARMEN/Espacio Central Abierto',
+        ]);
+        Room::create([
+            'name' =>'EL CARMEN/Espacio Coworking',
+        ]);
+
+        Room::create([
+            'name' =>'DOS ACERAS/Aula 3',
+        ]);
+        Room::create([
+            'name' =>'DOS ACERAS/Sala Común 1ªPlanta',
+        ]);
+        Room::create([
+            'name' =>'DOS ACERAS/Salon de Actos',
+        ]);
+        Room::create([
+            'name' =>'EDIF.GALAXIA/Sala Galaxia',
+        ]);
+        Room::create([
+            'name' => 'OTROS',
+        ]);
+
+
+        //Incidences seeds
+        Incidence::create([
+            'user_id' => 3,
+            'area_id' => 6,
+            'category_id' =>1,
+            'location_id' => 4,
+            'state_id' => 2,
+            'title' => 'Apoyo administrativo para nuevo proyecto',
+            'description' => 'Apoyo administrativo para nuevo proyecto para determinar viabilidad de promocion de becas',
+        ]);
+
+        Incidence::create([
+            'user_id' => 4,
+            'area_id' => 2,
+            'category_id' =>3,
+            'location_id' => 4,
+            'state_id' => 2,
+            'title' => 'Instalacion de nuevos programas a portatiles nuevos',
+            'description' => 'Instalacion de nuevos programas a portatiles nuevos que han llegado a RRHH para nuevos proyectos',
+        ]);
+
+        //Bookings seeds
+        Booking::create([
+            'user_id' => 5,
+            'area_id' => 10,
+            'room_id' => 9,
+            'location_id' => 5,
+            'state_id' => 1,
+            'date' => '2023-01-01',
+            'startTime' => '09:01',
+            'endTime' => '11:30',
+            'numPeople' => 6,
+            'description' => 'Presentacion de nuevo proyecto a Incorpora',
+            'comment' => '',
+        ]);
+
+        Booking::create([
+            'user_id' => 6,
+            'area_id' => 3,
+            'room_id' => 6,
+            'location_id' => 4,
+            'state_id' => 1,
+            'date' => '2023-01-01',
+            'startTime' => '10:01',
+            'endTime' => '12:01',
+            'numPeople' => 6,
+            'description' => 'Historias Femcoders',
+            'comment' => '',
+        ]);
+
     }
 }

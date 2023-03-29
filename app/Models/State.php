@@ -32,6 +32,20 @@ class State extends Model
      */
     protected $fillable = ['name'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bookings()
+    {
+        return $this->belongsTo('App\Models\Booking', 'state_id', 'id');
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function incidences()
+    {
+        return $this->belongsTo('App\Models\Incidence', 'state_id', 'id');
+    }
 
 }

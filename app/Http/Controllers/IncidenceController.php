@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
+use App\Models\User;
+use App\Models\State;
+use App\Models\Category;
+use App\Models\Location;
 use App\Models\Incidence;
 use Illuminate\Http\Request;
 
@@ -18,7 +23,10 @@ class IncidenceController extends Controller
      */
     public function index()
     {
-        $incidences = Incidence::paginate();
+        $incidences = Incidence::with(['users', 'areas', 'categories', 'locations', 'states'])->paginate();
+        //return view('incidence.index')->with('incidences', $incidences);
+
+        //$incidences = Incidence::paginate();
 
         return view('incidence.index', compact('incidences'))
             ->with('i', (request()->input('page', 1) - 1) * $incidences->perPage());
@@ -29,10 +37,17 @@ class IncidenceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //
     public function create()
     {
-        $incidence = new Incidence();
-        return view('incidence.create', compact('incidence'));
+        $incidences = new Incidence();
+        $users = User::pluck('name', 'id');
+        $categories = Category::pluck('name', 'id');
+        $states = State::pluck('name', 'id');
+        $locations = Location::pluck('name', 'id');
+        $areas = Area::pluck('name', 'id');
+
+        return view('incidence.create', compact('incidences', 'users', 'categories', 'areas', 'locations', 'states'));
     }
 
     /**
@@ -43,12 +58,24 @@ class IncidenceController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Incidence::$rules);
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'area_id' => 'required|exists:areas,id',
+            'category_id' => 'required|exists:categories,id',
+            'location_id' => 'required|exists:locations,id',
+            'state_id' => 'required|exists:states,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string'
+        ]);
 
+        //Si la validación pasa, creamos la incidencia con los datos del request
         $incidence = Incidence::create($request->all());
 
-        return redirect()->route('incidences.index')
-            ->with('success', 'Incidence created successfully.');
+        //Retornamos una redirección a la vista show.blade.php con un mensaje de éxito
+        return redirect()->route('incidences.index', $incidence)->with('success', 'Incidencia creada correctamente.');
+
+        //Retornamos una redirección a la vista show.blade.php con un mensaje de éxito
+        return redirect()->route('incidences.index', $incidence)->with('success', 'Incidencia creada correctamente.');
     }
 
     /**
@@ -57,11 +84,13 @@ class IncidenceController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($incidence)
     {
-        $incidence = Incidence::find($id);
-
-        return view('incidence.show', compact('incidence'));
+        //Obtenemos la incidencia con sus relaciones
+        //$incidence->with(['user', 'area', 'category', 'location', 'state']);
+        $incidence = Incidence::with(['user', 'area', 'category', 'location', 'state'])->findOrFail($incidence);
+    //Retornamos la vista show.blade.php con los datos
+        return view('incidence.show')->with(compact('incidence'));
     }
 
     /**
@@ -72,9 +101,16 @@ class IncidenceController extends Controller
      */
     public function edit($id)
     {
-        $incidence = Incidence::find($id);
+        $incidence = Incidence::findOrFail($id);
+        //Obtenemos los datos de las tablas relacionadas
+        $users = User::all();
+        $areas = Area::all();
+        $categories = Category::all();
+        $locations = Location::all();
+        $states = State::all();
 
-        return view('incidence.edit', compact('incidence'));
+        //Retornamos la vista edit.blade.php con los datos
+        return view('incidences.edit')->with(compact('incidences', 'users', 'areas', 'categories', 'locations', 'states'));
     }
 
     /**
@@ -86,12 +122,22 @@ class IncidenceController extends Controller
      */
     public function update(Request $request, Incidence $incidence)
     {
-        request()->validate(Incidence::$rules);
+        //Validamos los datos del request con las reglas que definamos
+    $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'area_id' => 'required|exists:areas,id',
+        'category_id' => 'required|exists:categories,id',
+        'location_id' => 'required|exists:locations,id',
+        'state_id' => 'required|exists:states,id',
+        'title' => 'required|string|max:255',
+        'description' => 'required|string'
+    ]);
 
-        $incidence->update($request->all());
+    //Si la validación pasa, creamos la incidencia con los datos del request
+    $incidence->update($request->all());
 
-        return redirect()->route('incidences.index')
-            ->with('success', 'Incidence updated successfully');
+    //Retornamos una redirección a la vista show.blade.php con un mensaje de éxito
+    return redirect()->route('incidences.index', $incidence)->with('success', 'Incidencia actualizada correctamente.');
     }
 
     /**
@@ -103,7 +149,7 @@ class IncidenceController extends Controller
     {
         $incidence = Incidence::find($id)->delete();
 
-        return redirect()->route('incidences.index')
+        return redirect()->route('incidence.index')
             ->with('success', 'Incidence deleted successfully');
     }
 }

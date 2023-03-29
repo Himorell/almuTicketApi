@@ -2,23 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Area
- *
- * @property $id
- * @property $name
- * @property $created_at
- * @property $updated_at
- *
- * @property Booking[] $bookings
- * @property Incidence[] $incidences
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
-class Area extends Model
+class Room extends Model
 {
     use HasFactory;
 
@@ -28,7 +15,7 @@ class Area extends Model
 
     protected $perPage = 20;
 
-        /**
+    /**
      * Attributes that should be mass-assignable.
      *
      * @var array
@@ -41,16 +28,13 @@ class Area extends Model
      */
     public function bookings()
     {
-        return $this->belongsTo('App\Models\Booking', 'area_id', 'id');
+        return $this->belongsTo('App\Models\Booking', 'room_id', 'id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function incidences()
-    {
-        return $this->belongsTo('App\Models\Incidence', 'area_id', 'id');
-    }
-
-
+    
 }
+
+

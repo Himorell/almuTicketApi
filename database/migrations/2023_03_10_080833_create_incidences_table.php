@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('area_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('location_id');
-            $table->unsignedBigInteger('state_id');
+            $table->unsignedBigInteger('state_id')->default(1);
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');           
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade')->onUpdate('cascade');
@@ -29,6 +29,7 @@ return new class extends Migration
             
             $table->string('title');
             $table->string('description');
+            $table->string('comment')->nullable();
 
             $table->timestamps();
 
