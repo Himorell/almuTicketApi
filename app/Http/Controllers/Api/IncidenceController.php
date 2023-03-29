@@ -37,7 +37,7 @@ class IncidenceController extends Controller
             $incidence->user_name = User::find($incidence->user_id)->name;
             $incidence->area_name = Area::find($incidence->area_id)->name;
             $incidence->location_name = Location::find($incidence->location_id)->name;
-            $incidence->room_name = Room::find($incidence->room_id)->name;
+            $incidence->category_name = Room::find($incidence->category_id)->name;
             $incidence->state_name = State::find($incidence->state_id)->name;
         }
 
