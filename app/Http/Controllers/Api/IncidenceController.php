@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Area;
 use App\Models\Room;
+use App\Models\Room;
 use App\Models\User;
 use App\Models\State;
 use App\Models\Category;
@@ -21,7 +22,18 @@ class IncidenceController extends Controller
 
     public function index(Request $request)
     {
-        $incidences = Incidence::all();
+            if (!$request->user()) {
+            return response()->json(['message' => 'No esta autorizado para visualizar esta ruta'], 401);
+        }
+
+            if ($request->user()->isAdmin) {
+
+            $incidences = Incidence::all();
+        } else {
+
+            $incidences = Incidence::where('user_id', $request->user()->id)->get();
+        }
+
         return response()->json($incidences, 200);
     }
 
