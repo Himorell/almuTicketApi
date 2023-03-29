@@ -21,8 +21,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(5)->create();
-
+        //Users seeds
         User::factory()->create([
             'name' => 'Fem',
             'surname' => 'Coders',
@@ -31,12 +30,44 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
+            'name' => 'Almudena',
+            'surname' => 'Andreu',
+            'email' => 'a.andreu@arrabalempleo.org',
+            'isAdmin' => True,
+        ]);
+
+        User::factory()->create([
             'name' => 'Himo',
-            'surname' => 'Jara',
+            'surname' => 'Jaramillo',
             'email' => 'himo@arrabalempleo.org',
             'isAdmin' => false,
         ]);
+        User::factory()->create([
+            'name' => 'Sandra',
+            'surname' => 'Leon',
+            'email' => 'sleon@arrabalempleo.org',
+            'isAdmin' => false,
+        ]);
+        User::factory()->create([
+            'name' => 'Carmen',
+            'surname' => 'Cruces',
+            'email' => 'ccruces@arrabalempleo.org',
+            'isAdmin' => false,
+        ]);
+        User::factory()->create([
+            'name' => 'Carmen',
+            'surname' => 'Gallardo',
+            'email' => 'cgallardo@arrabalempleo.org',
+            'isAdmin' => false,
+        ]);
+        User::factory()->create([
+            'name' => 'Raquel',
+            'surname' => 'Palomo',
+            'email' => 'rpalomo@arrabalempleo.org',
+            'isAdmin' => false,
+        ]);
 
+        //Categories seeds
         Category::create([
             'name' => 'Apoyo a Programas',
         ]);
@@ -53,7 +84,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Materiales',
         ]);
 
-
+        //States seeds
         State::create([
             'name' => 'Emitido',
         ]);
@@ -76,6 +107,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Finalizado',
         ]);
 
+        //Locations seeds
         Location::create([
             'name' => 'Dos Aceras',
         ]);
@@ -95,6 +127,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Remoto',
         ]);
 
+        //Areas seeds
         Area::create([
             'name' => 'Personas y Talento',
         ]);
@@ -147,6 +180,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Recepcion Galaxia',
         ]);
 
+        //Rooms seeds
         Room::create([
             'name' => 'IMO/Salon de Actos',
         ]);
@@ -191,32 +225,32 @@ class DatabaseSeeder extends Seeder
         Room::create([
             'name' =>'EDIF.GALAXIA/Aula Enrique Scholtz',
         ]);
-        Incidence::factory()->count(5)->create();
+
+
+        //Incidences seeds
+        Incidence::create([
+            'user_id' => 3,
+            'area_id' => 6,
+            'category_id' =>1,
+            'location_id' => 4,
+            'state_id' => 2,
+            'title' => 'Apoyo administrativo para nuevo proyecto',
+            'description' => 'Apoyo administrativo para nuevo proyecto para determinar viabilidad de promocion de becas',
+        ]);
 
         Incidence::create([
-            'user_id' => 1,
+            'user_id' => 4,
             'area_id' => 2,
             'category_id' =>3,
             'location_id' => 4,
             'state_id' => 2,
-            'title' => 'sentence',
-            'description' => 'paragraph',
+            'title' => 'Instalacion de nuevos programas a portatiles nuevos',
+            'description' => 'Instalacion de nuevos programas a portatiles nuevos que han llegado a RRHH para nuevos proyectos',
         ]);
 
-        Incidence::create([
-            'user_id' => 1,
-            'area_id' => 2,
-            'category_id' =>3,
-            'location_id' => 4,
-            'state_id' => 2,
-            'title' => 'Prueba',
-            'description' => 'Probando seeder 2',
-        ]);
-
-        Booking::factory()->count(5)->create();
-
+        //Bookings seeds
         Booking::create([
-            'user_id' => 1,
+            'user_id' => 5,
             'area_id' => 1,
             'room_id' => 1,
             'location_id' => 1,
@@ -224,9 +258,9 @@ class DatabaseSeeder extends Seeder
             'date' => '2023-01-01',
             'startTime' => '00:01',
             'endTime' => '00:01',
-            'numPeople' => 3,
-            'description' => 'paragraph',
-            'comment' => 'comment',
+            'numPeople' => 6,
+            'description' => 'Presentacion de nuevo proyecto a Incorpora',
+            'comment' => '',
         ]);
 
     }
