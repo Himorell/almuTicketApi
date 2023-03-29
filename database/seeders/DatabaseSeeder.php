@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         //Users seeds
-        //Users seeds
+        
         User::factory()->create([
             'name' => 'Fem',
             'surname' => 'Coders',
@@ -38,9 +38,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'name' => 'Himo',
-            'surname' => 'Jaramillo',
-            'email' => 'himo@arrabalempleo.org',
+            'name' => 'Anabel',
+            'surname' => 'Vilar',
+            'email' => 'avilar@arrabalempleo.org',
             'isAdmin' => false,
         ]);
         User::factory()->create([
@@ -245,15 +245,29 @@ class DatabaseSeeder extends Seeder
         //Bookings seeds
         Booking::create([
             'user_id' => 5,
-            'area_id' => 1,
-            'room_id' => 1,
-            'location_id' => 1,
+            'area_id' => 10,
+            'room_id' => 9,
+            'location_id' => 5,
             'state_id' => 1,
             'date' => '2023-01-01',
-            'startTime' => '00:01',
-            'endTime' => '00:01',
+            'startTime' => '09:01',
+            'endTime' => '11:30',
             'numPeople' => 6,
             'description' => 'Presentacion de nuevo proyecto a Incorpora',
+            'comment' => '',
+        ]);
+
+        Booking::create([
+            'user_id' => 6,
+            'area_id' => 3,
+            'room_id' => 6,
+            'location_id' => 4,
+            'state_id' => 1,
+            'date' => '2023-01-01',
+            'startTime' => '10:01',
+            'endTime' => '12:01',
+            'numPeople' => 6,
+            'description' => 'Historias Femcoders',
             'comment' => '',
         ]);
 
