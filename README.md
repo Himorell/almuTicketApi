@@ -128,6 +128,11 @@ This readme corresponds to the <b>backend development</b> of the application, wh
  <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"></img>
  </p>
  
+ <p>
+ <img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens"></img>
+ <img src="https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white"></img>
+ </p>
+ 
   
 <h2>8. Other Tools</h2>
 
