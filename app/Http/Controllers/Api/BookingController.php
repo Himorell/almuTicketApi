@@ -10,8 +10,6 @@ use App\Models\Booking;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Tymon\JWTAuth\Contracts\Providers\Auth;
 
 class BookingController extends Controller
 {
@@ -64,9 +62,9 @@ class BookingController extends Controller
             'description' => 'required',
             'comment' => 'nullable',
         ]);
-
-            $booking = Booking::create([
-            'user_id' => $user->id,
+        
+        $booking = Booking::create([
+            'user_id' => $user->isAdmin && $request->has('user_id') ? $request->user_id : $user->id,
             'area_id' => $validatedData['area_id'],
             'room_id' => $validatedData['room_id'],
             'location_id' => $validatedData['location_id'],
@@ -78,7 +76,9 @@ class BookingController extends Controller
             'description' => $validatedData['description'],
 
         ]);
-
+        
+        $booking->save();
+    
         return response()->json([
             'message' => 'Reserva creada con éxito',
             'data' => $booking
