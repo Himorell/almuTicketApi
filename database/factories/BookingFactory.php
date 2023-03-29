@@ -26,7 +26,6 @@ class BookingFactory extends Factory
             'startTime' => $this->faker->time($format = 'H:i', $max = 'now'),
             'endTime' => $this->faker->time($format = 'H:i', $max = 'now'),
             'numPeople' => $this->faker->numberBetween(1, 20),
-            //'room' => $this->faker->name(),
             'description' => $this->faker->sentence,
             'comment' => $this->faker->sentence,
         ];
