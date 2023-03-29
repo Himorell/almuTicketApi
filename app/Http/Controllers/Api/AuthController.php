@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 //use App\Http\Controllers\Api\AuthController;
@@ -16,6 +18,8 @@ class AuthController extends Controller
      *
      * @return void
      */
+    use HasFactory, RefreshDatabase;
+
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['login','register']]);
@@ -81,7 +85,8 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user_id' => auth()->user()->id
         ]);
     }
 
@@ -89,6 +94,7 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required',
+            'surname' => 'required',
             'email' => 'required|string|max:100|unique:users',
             'password' => 'required|string|min:6', //se puede agregar el atributo confirmed
         ]);

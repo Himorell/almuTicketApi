@@ -23,6 +23,7 @@ class TicketController extends Controller
             'incidences' => $incidences,
             'bookings' => $bookings,
         ]);
+
     }
 
     /**
