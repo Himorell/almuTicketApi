@@ -67,6 +67,10 @@ class DatabaseSeeder extends Seeder
             'isAdmin' => false,
         ]);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ba1d761 (move middleware branch in branch dev)
         //Categories seeds
         Category::create([
             'name' => 'Apoyo a Programas',

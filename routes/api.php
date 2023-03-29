@@ -89,4 +89,8 @@ Route::put('/updateCategory/{id}', [CategoryController::class, 'update'])->name(
 
 Route::get('/users', [UserController::class, 'index'])->name('usersApi');
 Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('destroyUserApi');
+<<<<<<< HEAD
 Route::put('/updateUser/{id}', [UserController::class, 'update'])->name('updateUserApi');
+=======
+Route::put('/updateUser/{id}', [UserController::class, 'update'])->name('updateUserApi');
+>>>>>>> ba1d761 (move middleware branch in branch dev)

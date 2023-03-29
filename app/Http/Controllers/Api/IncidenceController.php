@@ -40,9 +40,8 @@ class IncidenceController extends Controller
             $incidence->category_name = Room::find($incidence->category_id)->name;
             $incidence->state_name = State::find($incidence->state_id)->name;
         }
+
         return response()->json($incidences, 200);
-
-
     }
 
     public function store(Request $request)
@@ -66,14 +65,6 @@ class IncidenceController extends Controller
             'title' => $validatedData['title'],
             'description' => $validatedData['description'],
         ]);
-
-        foreach ($incidence as $incidence) {
-            $incidence->user_name = User::find($incidence->user_id)->name;
-            $incidence->area_name = Area::find($incidence->area_id)->name;
-            $incidence->location_name = Location::find($incidence->location_id)->name;
-            $incidence->category_name = Room::find($incidence->category_id)->name;
-            $incidence->state_name = State::find($incidence->state_id)->name;
-        }
 
         return response()->json([
             'message' => 'Incidencia creada con éxito',
