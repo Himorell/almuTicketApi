@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Area;
 use App\Models\Room;
-use App\Models\Room;
 use App\Models\User;
 use App\Models\State;
 use App\Models\Category;
@@ -73,15 +72,8 @@ class IncidenceController extends Controller
         ], 201);
     }
 
-<<<<<<< HEAD
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-=======
 
     public function show(Request $request, $id)
->>>>>>> cc42d84 (change update destroy incidences middleware)
     {
         if (!$request->user()) {
             return response()->json(['message' => 'Unauthorized'], 401);
@@ -102,16 +94,7 @@ class IncidenceController extends Controller
         return response()->json($incidence, 200);
     }
 
-<<<<<<< HEAD
-    
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-=======
     public function update(Request $request, $id)
->>>>>>> cc42d84 (change update destroy incidences middleware)
     {
 
         $user = auth()->user();

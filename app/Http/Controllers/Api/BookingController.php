@@ -10,6 +10,7 @@ use App\Models\Booking;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Contracts\Providers\Auth;
 
 class BookingController extends Controller
@@ -19,33 +20,32 @@ class BookingController extends Controller
         $this->middleware('auth:api');
     }
 
+
     public function index(Request $request)
-{
-    if (!$request->user()) {
-        return response()->json(['message' => 'No está autorizado para visualizar esta ruta'], 401);
+    {
+        if (!$request->user()) {
+            return response()->json(['message' => 'No está autorizado para visualizar esta ruta'], 401);
+        }
+
+        if ($request->user()->isAdmin) {
+            $bookings = Booking::all();
+        } else {
+            $bookings = Booking::where('user_id', $request->user()->id)->get();
+        }
+
+        // Obtener los modelos de Area y Location correspondientes a cada Booking
+        foreach ($bookings as $booking) {
+            $booking->user_name = User::find($booking->user_id)->name;
+            $booking->area_name = Area::find($booking->area_id)->name;
+            $booking->location_name = Location::find($booking->location_id)->name;
+            $booking->room_name = Room::find($booking->room_id)->name;
+            $booking->state_name = State::find($booking->state_id)->name;
+        }
+
+        return response()->json($bookings, 200);
     }
 
-    if ($request->user()->isAdmin) {
-        $bookings = Booking::all();
-    } else {
-        $bookings = Booking::where('user_id', $request->user()->id)->get();
-    }
 
-    // Obtener los modelos de Area y Location correspondientes a cada Booking
-    foreach ($bookings as $booking) {
-        $booking->user_name = User::find($booking->user_id)->name;
-        $booking->area_name = Area::find($booking->area_id)->name;
-        $booking->location_name = Location::find($booking->location_id)->name;
-        $booking->room_name = Room::find($booking->room_id)->name;
-        $booking->state_name = State::find($booking->state_id)->name;
-    }
-
-    return response()->json($bookings, 200);
-}
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
 
@@ -84,9 +84,8 @@ class BookingController extends Controller
         ], 201);
 
     }
-    /**
-     * Display the specified resource.
-     */
+
+
     public function show(Request $request, $id)
     {
 
@@ -94,42 +93,31 @@ class BookingController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        // Verificar si el usuario es un administrador
         if ($request->user()->isAdmin) {
-            // Recuperar cualquier reserva
+
             $booking = Booking::find($id);
         } else {
-            // Recuperar solo las reservas del usuario autenticado
+
             $booking = Booking::where('user_id', $request->user()->id)->where('id', $id)->first();
         }
 
-        // Verificar si la reserva existe
         if (!$booking) {
             return response()->json(['message' => 'Booking not found'], 404);
         }
 
-        // Devolver la respuesta correspondiente en formato JSON
         return response()->json($booking, 200);
     }
 
 
-    
-
-    /**
-     * Update the specified resource in storage.
-     */
-
     public function update(Request $request, $id)
     {
-
-        if (!$request->user()) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+        
+        $user = auth()->user();
+        if (!$user || !$user->isAdmin) {
+            return response()->json(['message' => 'Unauthorized'], 403);
         }
-
-        if (!$request->user()->isAdmin) {
-            return response()->json(['message' => 'Forbidden'], 403);
-        }
-
+        
+        if ($user->isAdmin) {
         $booking = Booking::findOrFail($id);
 
         $validatedData = $request->validate([
@@ -147,17 +135,16 @@ class BookingController extends Controller
             'message' => 'Reserva de sala actualizada correctamente.',
             'data' => $booking
         ], 200);
-
+        }
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($request,string $id)
+    public function destroy(Request $request, string $id)
     {
-        if (!$request->user()) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+        $user = $request->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'No estás autenticado'], 401);
         }
 
         $booking = Booking::find($id);
