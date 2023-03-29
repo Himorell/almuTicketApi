@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Booking;
 use App\Models\Area;
+use App\Models\Room;
 use App\Models\User;
 use App\Models\State;
+use App\Models\Booking;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,6 +16,14 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = Booking::all();
+
+        foreach ($bookings as $booking) {
+            $booking->user_name = User::find($booking->user_id)->name;
+            $booking->area_name = Area::find($booking->area_id)->name;
+            $booking->location_name = Location::find($booking->location_id)->name;
+            $booking->room_name = Room::find($booking->room_id)->name;
+            $booking->state_name = State::find($booking->state_id)->name;
+        }
         return response()->json($bookings, 200);
     }
 
