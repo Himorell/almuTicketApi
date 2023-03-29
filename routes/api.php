@@ -61,6 +61,7 @@ Route::delete('/deleteBooking/{id}', [BookingController::class, 'destroy'])->nam
 Route::post('/createBooking', [BookingController::class, 'store'])->name('createBookingApi')->middleware('auth');
 Route::put('/updateBooking/{id}', [BookingController::class, 'update'])->name('updateBookingApi')->middleware('auth');
 
+
 Route::get('/states', [StateController::class, 'index'])->name('statesApi');
 Route::delete('/deleteState/{id}',[StateController::class,'destroy'])->name('destroyStateApi');
 Route::post('/createState',[StateController::class,'store'])->name('createStateApi');
@@ -88,9 +89,4 @@ Route::put('/updateCategory/{id}', [CategoryController::class, 'update'])->name(
 
 Route::get('/users', [UserController::class, 'index'])->name('usersApi');
 Route::delete('/deleteUser/{id}', [UserController::class, 'destroy'])->name('destroyUserApi');
-<<<<<<< HEAD
 Route::put('/updateUser/{id}', [UserController::class, 'update'])->name('updateUserApi');
-=======
-Route::put('/updateUser/{id}', [UserController::class, 'update'])->name('updateUserApi');
-
-
