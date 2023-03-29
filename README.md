@@ -187,12 +187,13 @@ This readme corresponds to the <b>backend development</b> of the application, wh
 <h3>11.3 Warning & Testing</h3>
 <ol>
 <li><b>Important</b>: If we then need to run more commands in the IDE, we'll open a third terminal without closing the previous two.</li>
-<li><b>Test</b>: Run in the IDE <b>php artisan test</b> & <b>vendor/bin/phpunit</b> where it should return the following result:<b> Test: 25 passed (80 assertions)</b> and <b> Tests: 25, Assertions: 80, Warnings: 1 </b></li>
+<li><b>Test</b>: Run in the IDE <b>php artisan test</b> & <b>vendor/bin/phpunit</b> where it should return the following result:<b> Test: 26 passed (85 assertions)</b> and <b> Tests: 26, Assertions: 85</b></li>
 </ol>
 
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
-<img style="width:790px; height:370px; margin:12px" src="https://user-images.githubusercontent.com/116546588/227026949-9ff97f98-ec4b-49d4-b334-91c7347dd223.png" alt="testBackend"/>
+<img style="width:780px; height:390px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228683475-b8982965-cd68-4465-9dac-e90a819816ea.png" alt="testBackend"/>
 </div>
+
 
 <h3>11.4 API verification with Postman</h3>
 Through the Postman application we have carried out our API verification. Through this application we have tested the "HTTP Request" to validate the responses received. Below we share the verification carried out:
@@ -221,7 +222,11 @@ Through the Postman application we have carried out our API verification. Throug
 </div>
 
 <h2>12. Next steps</h2>
-
 <ul>
-<li>In development process</li>
+<li>Frontend test</li>
+<li>Implementation of more functionality in tables.</li>    
+<li>Connection of all components with AXIOS.</li>    
+<li>Enable route to show views from tickets.</li> 
+<li>Implement media query in Frontend.</li>
+<li>Implement the view of the helper CRUD's.</li>    
 </ul>
