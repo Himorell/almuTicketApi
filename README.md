@@ -66,9 +66,8 @@ This readme corresponds to the <b>backend development</b> of the application, wh
 </ul>
 
 <h2>4. Project Demo</h2>
-
 <div style="display:flex; flex-wrap:wrap; justify-content:center; margin:auto">
-<img style="width:780px; height:390px; margin:12px" src="https://user-images.githubusercontent.com/116546588/228353492-7fdf086b-d898-474f-ab59-91c81ac1dac4.jpg" alt="testBackend"/>
+<video src="https://user-images.githubusercontent.com/116546588/228701591-1d0f5087-e6af-4b52-b853-2aa7c841c82f.mp4" controls></video>
 </div>
 
 <h2>5. Atomic Design</h2>
